@@ -1,50 +1,114 @@
 # CSforGood-Webpage
-Instead of creating files directly on the GitHub website, your team should set up the repository on their computers to code locally.
+Once everyone has accepted their GitHub invitations, you can start working on the project together.
 
-1. Clone the Repository
+The best way to collaborate is for each person to have their own copy of the repository and work on separate Git branches. This helps prevent people from accidentally overwriting or breaking each other's code.
 
-Everyone on the team (including the owner, if they haven't done it yet) needs to download the repository.
-• On the main page of your GitHub repository, click the green Code button and copy the HTTPS URL.
-• Open your terminal (or Command Prompt) and run:bash
+Step 1: Clone the Repository
+Both the project owner and collaborators should first download a copy of the repository to their own computers.
+
+Go to the GitHub repository.
+Click the green <> Code button.
+Copy the HTTPS URL.
+Open your terminal or Command Prompt.
+Run:
 git clone <PASTE_URL_HERE>
-Use code with caution.
-• Enter the folder: cd <REPOSITORY_NAME>
+Move into the project folder:
+cd <REPOSITORY_NAME>
+You now have a local copy of the GitHub repository that you can work on from your computer.
 
-2. Create a Branch (Crucial for Collaboration)
+Step 2: Create the Initial Project Files — Owner
+If you are the project owner or the person starting the project, create the initial files before your teammates begin working.
 
-Never work directly on the main or master branch at the same time. This causes "merge conflicts" where your code overwrites each other's work.
-Before creating any files, create a new branch for the specific feature or file you are working on:
-bash
-git checkout -b create-initial-files
-Use code with caution.
+For example, your project might include:
 
-3. Create and Commit the File
+README.md — explains the project
+index.html — main HTML page
+style.css — website styling
+app.js — JavaScript functionality
+Once you have created the initial files, save them and add them to Git:
 
-Now, open the folder in your favorite code editor (like VS Code) and create your new files (e.g., index.html, main.py, or README.md).
-Once you have created or edited your files, save them and log the changes in Git:
-bash
-# Check what files were changed/created
-git status
-
-# Stage the files to be committed
 git add .
+Create a commit describing your changes:
 
-# Save the changes with a clear message
-git commit -m "Create initial project structure and README"
-Use code with caution.
+git commit -m "Initial project setup"
+Then push the files to the main branch on GitHub:
 
-4. Push the Branch to GitHub
+git push origin main
+Your initial project is now available on GitHub for the rest of the team.
 
-Send your local branch up to the remote GitHub repository:
-bash
-git push origin create-initial-files
-Use code with caution.
+Step 3: How Team Members Should Add Files Safely
+After the owner has pushed the initial project, collaborators can begin working.
 
-Step 3: Review and Merge (Pull Requests)
+Important: Collaborators should avoid working directly on the main branch. Each person should create their own branch for the specific feature or task they are working on.
+1. Get the Latest Version
+First, make sure your local copy contains the owner's latest changes:
 
-Once the branch is pushed, you use GitHub to safely review the new files before adding them to the final project.
-1. Go to your repository page on GitHub. You will see a yellow banner that says "Compare & pull request". Click it.
-2. Write a short description of what files you added and click Create pull request.
-3. Your teammates can now look at the code, leave comments, and make sure everything looks correct.
-4. If everything looks good, click Merge pull request. This safely combines your new files into the main branch.
-Pro-Tip for the Team: Before anyone starts creating a new file or branch, they should always run git pull origin main in their terminal. This downloads the most updated version of the project so everyone is working on the same page!
+git pull origin main
+2. Create a New Branch
+Create a branch for your specific task:
+
+git checkout -b feature-add-login
+You can name the branch based on what you are working on.
+
+Examples:
+
+feature-add-login
+feature-user-profile
+feature-homepage
+fix-navigation
+3. Create or Modify Your Files
+Open the project in your code editor, such as VS Code, and work on your assigned feature.
+
+Because you are working on your own branch, your changes will not immediately affect the main branch.
+
+4. Save and Commit Your Work
+When you are finished with your changes, stage the files:
+
+git add .
+Then create a commit:
+
+git commit -m "Added login form"
+Try to make your commit message clearly describe what you changed.
+
+5. Push Your Branch to GitHub
+Upload your branch to GitHub:
+
+git push origin feature-add-login
+Your branch and changes should now appear on the GitHub repository.
+
+Step 4: Review and Merge Using a Pull Request
+After pushing your branch, go to the repository on GitHub.
+
+GitHub will usually show an option to Create a Pull Request for your newly pushed branch.
+
+A Pull Request (PR) allows the team to:
+
+Review the code before it is added to the project
+Discuss or suggest changes
+Find potential problems
+Make sure the new feature works with the existing code
+Safely merge changes into the main branch
+Once the team has reviewed the changes and everyone is satisfied, the Pull Request can be merged into main.
+
+The Basic Team Workflow
+The overall process looks like this:
+
+Owner creates the project
+        ↓
+Owner pushes initial files
+        ↓
+Team member pulls the latest version
+        ↓
+Team member creates a new branch
+        ↓
+Team member makes changes
+        ↓
+Team member commits changes
+        ↓
+Team member pushes their branch
+        ↓
+Team member opens a Pull Request
+        ↓
+Team reviews the changes
+        ↓
+Pull Request is merged into main
