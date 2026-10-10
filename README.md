@@ -22,6 +22,67 @@ This app is designed for:
 
 The app should be easy to navigate, use large readable text, and explain concepts without technical jargon.
 
+## Team Roles & Responsibilities
+
+Our team of 5 high schoolers is working together to build different parts of the app:
+
+### **Avaneesh - Homepage & User Interface**
+- Design and build the main landing page
+- Create a clean, welcoming interface that's easy for seniors to understand
+- Build navigation menu and overall site structure
+- Ensure the design is accessible (large fonts, clear colors, simple layout)
+- Add instructions on how to use the app
+
+### **Sanjiv - Input & Upload Page**
+- Create the page where users can submit emails or screenshots for analysis
+- Build file upload functionality (images, text, screenshots)
+- Design a simple, clear form that explains what to upload and why
+- Add validation to check that uploads are valid
+- Include helpful instructions for seniors on how to take screenshots or copy text
+
+### **Praneysh - Results & Analysis Page**
+- Build the page that displays analysis results
+- Show a "scam likelihood" percentage or rating (e.g., "This looks 85% likely to be a scam")
+- Display specific warnings or red flags found in the email/content
+- Provide clear explanations of why something is or isn't a scam
+- Add helpful next steps ("What to do if this is a scam")
+
+### **Aayush - AI Integration & Leadership**
+- Research and integrate AI tools (like OpenAI's GPT API or Claude API) into the app
+- Build the backend logic that analyzes submitted emails/text for scam indicators
+- Learn how to make API calls and handle responses in JavaScript/backend
+- Lead the team in planning how to use AI effectively
+- Document how the AI analysis works so the team understands it
+- Mentor Darsh on JavaScript best practices
+
+### **Darsh - JavaScript Development & Enhancement**
+- Learn advanced JavaScript to power interactive features
+- Build form validation and user interaction handling
+- Create smooth transitions between pages
+- Add features like copy-to-clipboard, print functionality
+- Handle loading states and error messages
+- Work with Aayush to integrate AI results into the frontend
+
+---
+
+## Project Structure
+
+Here's how the app will flow:
+
+```
+Homepage (Avaneesh)
+    ↓
+User uploads email/text (Sanjiv)
+    ↓
+AI analyzes content (Aayush)
+    ↓
+Results page shows scam likelihood (Praneysh)
+    ↓
+User gets safety tips & recommendations
+```
+
+---
+
 ## Step 1: Clone the Repository
 
 Each team member should begin by downloading the project to their own computer.
@@ -46,153 +107,139 @@ This gives you a local copy of the project so you can work on it from your machi
 
 ## Step 2: Create the Initial Project Files
 
-If you are the project owner or the first person setting up the repository, create the base files before teammates begin contributing.
+The project owner sets up the base structure:
 
-For example:
-
-```bash
-README.md
-index.html
-style.css
-app.js
-assets/
+```
+index.html (homepage)
+upload.html (upload/input page)
+results.html (analysis results page)
+style.css (styling for all pages)
+app.js (main JavaScript functionality)
+ai-integration.js (AI/API integration)
+assets/ (images, icons, etc.)
 ```
 
-Once your files are ready, add them to Git:
+Once files are ready, add them to Git:
 
 ```bash
 git add .
 ```
 
-Create a commit message that describes the setup:
+Create a commit message:
 
 ```bash
-git commit -m "Initial project setup"
+git commit -m "Initial project setup with page structure"
 ```
 
-Then push the files to the main branch:
+Then push to main:
 
 ```bash
 git push origin main
 ```
 
-This makes the project available for the rest of the team on GitHub.
-
 ## Step 3: Work on Separate Branches
 
-To avoid overwriting each other's work, every teammate should create their own branch before making changes.
+Each team member creates their own feature branch:
 
-First, pull the latest version of the project:
-
+**Avaneesh:**
 ```bash
-git pull origin main
+git checkout -b feature-homepage
 ```
 
-Then create a feature branch for your task:
-
+**Sanjiv:**
 ```bash
-git checkout -b feature-scam-guide
+git checkout -b feature-upload-page
 ```
 
-You can name branches based on what you're working on, for example:
+**Praneysh:**
+```bash
+git checkout -b feature-results-page
+```
 
-- feature-phishing-guide
-- feature-email-safety
-- feature-privacy-settings
-- feature-device-tutorial
-- fix-accessibility
-- feature-search-function
-- feature-senior-center-partnership
+**Aayush:**
+```bash
+git checkout -b feature-ai-integration
+```
 
-This keeps our work organized and makes it easier to review changes later.
+**Darsh:**
+```bash
+git checkout -b feature-javascript-enhancement
+```
+
+This keeps everyone's work organized and prevents conflicts.
 
 ## Step 4: Make Your Changes
 
-Open the project in VS Code or another editor and work on your assigned section.
+Each person works on their assigned section:
 
-Each person might focus on:
+- Pull the latest code frequently (`git pull origin main`)
+- Make your changes in your editor
+- Test your work locally
+- Commit often with clear messages
+- Keep communication open with the team about dependencies
 
-- Creating content about specific scams (email fraud, fake tech support, romance scams, etc.)
-- Writing explanations of confusing device settings
-- Building interactive tutorials or walkthroughs
-- Designing user-friendly navigation
-- Improving accessibility (large fonts, clear colors, easy-to-read language)
-- Testing with seniors or community partners
-- Building search or filtering features
+### Important Notes for High Schoolers
 
-Because you are working on your own branch, your edits will not affect the main project until you push and merge them.
+- **Avaneesh**: Focus on making the UI beginner-friendly. Test with family members or seniors if possible.
+- **Sanjiv**: Think about what makes uploading difficult for seniors (small buttons, confusing labels). Test with real screenshots.
+- **Praneysh**: Make the results clear and non-technical. Use simple language, not computer jargon.
+- **Aayush**: Research AI APIs early. Try making test calls to understand how they work. Document everything for the team.
+- **Darsh**: Focus on small, reusable functions. Comment your code so others can understand it.
 
 ## Step 5: Save, Commit, and Push
 
-When you're finished with your changes, stage the files:
+When you finish a section:
 
 ```bash
 git add .
+git commit -m "Descriptive message about what you changed"
+git push origin feature-your-feature-name
 ```
-
-Create a clear commit message:
-
-```bash
-git commit -m "Added phishing email guide with examples"
-```
-
-Then push your branch to GitHub:
-
-```bash
-git push origin feature-scam-guide
-```
-
-Your branch should now appear in the repository for review.
 
 ## Step 6: Open a Pull Request
 
-After pushing your branch, go to the repository on GitHub.
+After pushing, create a Pull Request on GitHub so teammates can review your work.
 
-GitHub will usually offer the option to Create a Pull Request. A pull request (PR) allows our team to:
+A PR allows the team to:
+- Review code and design
+- Suggest improvements
+- Catch bugs or issues
+- Make sure everything works together
+- Test with real users if possible
 
-- review the content and code for clarity and accuracy
-- check that explanations are simple and jargon-free
-- ensure the design is accessible and easy to use
-- test with target users (seniors, community partners)
-- discuss improvements
-- merge updates safely into main
+Once approved, merge into main.
 
-Once teammates review the work and approve it, the PR can be merged into main.
+---
 
-## Team Workflow Summary
+## Roadmap & Next Steps
 
-The overall project workflow looks like this:
+After we complete the core pages and AI integration, we can add:
 
-```text
-Project owner sets up repository
-        ↓
-Repository is pushed to GitHub
-        ↓
-Team members pull the latest version
-        ↓
-Each member creates a branch
-        ↓
-Members work on their assigned feature or content
-        ↓
-Changes are committed and pushed
-        ↓
-Pull requests are reviewed (content, design, accessibility)
-        ↓
-Approved changes are merged into main
-```
+1. **User Accounts** — let users save their history and get personalized tips
+2. **Learning Modules** — interactive tutorials teaching digital safety
+3. **FAQ Section** — common questions about scams and security
+4. **Mobile App** — convert the website to a mobile-friendly app
+5. **Community Features** — let users share common scams they've seen
+6. **Real-Time Alerts** — notify users about new scams in the news
+7. **Senior Center Integration** — work with local centers to test and gather feedback
+8. **Multi-Language Support** — translate for non-English speakers
+9. **Video Tutorials** — visual guides for specific topics
+10. **Accessibility Features** — voice-over options, text-to-speech, adjustable fonts
+
+---
 
 ## Team Collaboration Guidelines
 
 To keep the project smooth and organized, we should:
 
 - pull the latest version before starting work
-- use clear, descriptive branch names
-- make small, focused commits with good messages
-- write content in plain, accessible language
-- test with community partners and target users
-- review pull requests carefully before merging
-- communicate when editing the same file or feature
-- keep accessibility in mind (font size, color contrast, simple language)
+- use clear, descriptive branch names and commit messages
+- make small, focused commits (not huge changes all at once)
+- test your code before pushing
+- ask questions if you're stuck
+- review each other's pull requests carefully
+- keep accessibility in mind (large fonts, clear language, easy navigation)
+- communicate about changes that might affect others' work
 
 ## Content Guidelines
 
@@ -202,11 +249,42 @@ When creating content for this app:
 - **Use real examples** — show actual scam emails, screenshots, or common confusion points
 - **Be encouraging** — remind users that it's okay to ask questions and be cautious
 - **Organize clearly** — use short sections, bullet points, and headings
-- **Test with seniors** — whenever possible, ask community partners or seniors to review content
-- **Think accessibility** — use large fonts, good color contrast, and simple navigation
+- **Test with target users** — ask family members or local seniors to try it
+- **Think accessibility** — large fonts, good color contrast, simple navigation
+
+---
+
+## Resources & Learning
+
+### For Aayush (AI Integration):
+- OpenAI API documentation: https://platform.openai.com/docs
+- Claude API (Anthropic): https://claude.ai/api
+- How to make API calls in JavaScript: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
+- Scam detection patterns: research common phishing keywords and scam red flags
+
+### For Darsh (JavaScript):
+- MDN Web Docs: https://developer.mozilla.org/en-US/docs/Web/JavaScript
+- JavaScript Promises & Async/Await: Learn how to handle AI API responses
+- DOM Manipulation: https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model
+- Form Handling & Validation
+
+### For Everyone:
+- GitHub Basics: https://guides.github.com/
+- HTML/CSS Fundamentals (if needed)
+- Accessibility Guidelines: https://www.w3.org/WAI/fundamentals/
+
+---
 
 ## Final Note
 
-This project is more than just an app — it's about protecting vulnerable populations and empowering seniors to use technology safely and confidently. By working together through GitHub and pull requests, and by staying connected to the community we're serving, we can build something meaningful that makes a real difference.
+This project is more than just an app — it's about protecting vulnerable populations and empowering seniors to use technology safely and confidently. As high schoolers, you're gaining real-world experience in:
+
+- **Teamwork** — coordinating across 5 people with different roles
+- **Software development** — building a real web application
+- **Problem-solving** — debugging, testing, and improving code
+- **Social impact** — creating something that genuinely helps people
+- **AI & technology** — learning cutting-edge tools like GPT and Claude
+
+By working together through GitHub, communicating clearly, and staying connected to the problem you're solving, you can build something meaningful that makes a real difference.
 
 Thank you for being part of NexTech CS for Good! 🌟
