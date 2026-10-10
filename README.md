@@ -1,150 +1,187 @@
-# CSforGood-Webpage
-Part 2: How to Start Creating Files Together
+# NexTech CS for Good - Team Webpage Project
 
-Once everyone has accepted their GitHub invitations, you can start working on the project together.
+Welcome to our repository for the NexTech CS for Good project. This project is a collaborative web development effort where our team builds a website to raise awareness, share information, and promote meaningful action around a social issue.
 
-The best way to collaborate is for each person to have their own copy of the repository and work on separate Git branches. This helps prevent people from accidentally overwriting or breaking each other's code.
+This repository is where we plan, create, review, and improve our webpage as a team using GitHub, version control, and branch-based collaboration.
 
-# Step 1: Clone the Repository
+## Project Goal
 
-Both the project owner and collaborators should first download a copy of the repository to their own computers.
+Our goal is to create a clean, engaging, and accessible webpage that reflects the values of the CS for Good initiative. The project helps us apply web development skills while working together in a realistic team environment.
+
+The project may include files such as:
+
+- README.md — overview and collaboration guide
+- index.html — main webpage structure
+- style.css — page styling and layout
+- app.js — interactive functionality and JavaScript
+
+## Step 1: Clone the Repository
+
+Each team member should begin by downloading the project to their own computer.
 
 Go to the GitHub repository.
-Click the green <> Code button.
-Copy the HTTPS URL.
-Open your terminal or Command Prompt.
+Click the green Code button.
+Copy the HTTPS link.
+Open your terminal or command prompt.
 Run:
-git clone <PASTE_URL_HERE>
 
-Move into the project folder:
-cd <REPOSITORY_NAME>
+```bash
+git clone https://github.com/aayushgupta317/AASDP-CSForGood26-27.git
+```
 
+Then move into the project folder:
 
-You now have a local copy of the GitHub repository that you can work on from your computer.
+```bash
+cd AASDP-CSForGood26-27
+```
 
-# Step 2: Create the Initial Project Files — Owner
+This gives you a local copy of the project so you can work on it from your machine.
 
-If you are the project owner or the person starting the project, create the initial files before your teammates begin working.
+## Step 2: Create the Initial Project Files
 
-For example, your project might include:
+If you are the project owner or the first person setting up the repository, create the base files before teammates begin contributing.
 
-README.md — explains the project
-index.html — main HTML page
-style.css — website styling
-app.js — JavaScript functionality
+For example:
 
-Once you have created the initial files, save them and add them to Git:
+```bash
+README.md
+index.html
+style.css
+app.js
+```
 
+Once your files are ready, add them to Git:
+
+```bash
 git add .
+```
 
+Create a commit message that describes the setup:
 
-Create a commit describing your changes:
-
+```bash
 git commit -m "Initial project setup"
+```
 
+Then push the files to the main branch:
 
-Then push the files to the main branch on GitHub:
-
+```bash
 git push origin main
+```
 
+This makes the project available for the rest of the team on GitHub.
 
-Your initial project is now available on GitHub for the rest of the team.
+## Step 3: Work on Separate Branches
 
-# Step 3: How Team Members Should Add Files Safely
+To avoid overwriting each other's work, every teammate should create their own branch before making changes.
 
-After the owner has pushed the initial project, collaborators can begin working.
+First, pull the latest version of the project:
 
-Important: Collaborators should avoid working directly on the main branch. Each person should create their own branch for the specific feature or task they are working on.
-1. Get the Latest Version
-
-First, make sure your local copy contains the owner's latest changes:
-
+```bash
 git pull origin main
+```
 
-# 2. Create a New Branch
+Then create a feature branch for your task:
 
-Create a branch for your specific task:
+```bash
+git checkout -b feature-homepage
+```
 
-git checkout -b feature-add-login
+You can name branches based on your task, for example:
 
+- feature-homepage
+- feature-about-section
+- feature-contact-form
+- fix-navigation
+- feature-team-page
 
-You can name the branch based on what you are working on.
+This keeps our work organized and makes it easier to review changes later.
 
-Examples:
+## Step 4: Make Your Changes
 
-feature-add-login
-feature-user-profile
-feature-homepage
-fix-navigation
+Open the project in VS Code or another editor and work on your assigned section.
 
-# 3. Create or Modify Your Files
+Each person should focus on their own part of the website, such as:
 
-Open the project in your code editor, such as VS Code, and work on your assigned feature.
+- homepage design
+- about section content
+- team member cards
+- donation / call-to-action section
+- contact page or form
+- responsive styling updates
 
-Because you are working on your own branch, your changes will not immediately affect the main branch.
+Because you are working on your own branch, your edits will not affect the main project until you push and merge them.
 
-# 4. Save and Commit Your Work
+## Step 5: Save, Commit, and Push
 
-When you are finished with your changes, stage the files:
+When you're finished with your changes, stage the files:
 
+```bash
 git add .
+```
 
+Create a clear commit message:
 
-Then create a commit:
+```bash
+git commit -m "Added homepage hero section"
+```
 
-git commit -m "Added login form"
+Then push your branch to GitHub:
 
+```bash
+git push origin feature-homepage
+```
 
-Try to make your commit message clearly describe what you changed.
+Your branch should now appear in the repository for review.
 
-# 5. Push Your Branch to GitHub
-
-Upload your branch to GitHub:
-
-git push origin feature-add-login
-
-
-Your branch and changes should now appear on the GitHub repository.
-
-# Step 4: Review and Merge Using a Pull Request
+## Step 6: Open a Pull Request
 
 After pushing your branch, go to the repository on GitHub.
 
-GitHub will usually show an option to Create a Pull Request for your newly pushed branch.
+GitHub will usually offer the option to Create a Pull Request. A pull request (PR) allows our team to:
 
-A Pull Request (PR) allows the team to:
+- review the code before it is merged
+- discuss issues or improvements
+- check that the page works correctly
+- make sure new changes fit the project goals
+- merge updates safely into main
 
-Review the code before it is added to the project
-Discuss or suggest changes
-Find potential problems
-Make sure the new feature works with the existing code
-Safely merge changes into the main branch
+Once teammates review the work and approve it, the PR can be merged into main.
 
-Once the team has reviewed the changes and everyone is satisfied, the Pull Request can be merged into main.
+## Team Workflow Summary
 
-The Basic Team Workflow
+The overall project workflow looks like this:
 
-The overall process looks like this:
+```text
+Project owner sets up repository
+        ↓
+Repository is pushed to GitHub
+        ↓
+Team members pull the latest version
+        ↓
+Each member creates a branch
+        ↓
+Members work on their assigned feature
+        ↓
+Changes are committed and pushed
+        ↓
+Pull requests are reviewed
+        ↓
+Approved changes are merged into main
+```
 
-Owner creates the project
-        ↓
-Owner pushes initial files
-        ↓
-Team member pulls the latest version
-        ↓
-Team member creates a new branch
-        ↓
-Team member makes changes
-        ↓
-Team member commits changes
-        ↓
-Team member pushes their branch
-        ↓
-Team member opens a Pull Request
-        ↓
-Team reviews the changes
-        ↓
-Pull Request is merged into main
+## Team Collaboration Guidelines
 
+To keep the project smooth and organized, we should:
 
-Following this workflow keeps everyone's work organized and reduces the chance of accidentally overwriting someone else's code.
+- pull the latest version before starting work
+- use clear branch names
+- make small, focused commits
+- write descriptive commit messages
+- review pull requests before merging
+- communicate when editing the same file or feature
+
+This workflow helps us collaborate efficiently while reducing the risk of overwriting each other's work.
+
+## Final Note
+
+This project is more than just a webpage — it is an opportunity to apply teamwork, problem-solving, and software development practices in a meaningful CS for Good context. By working together through GitHub and pull requests, we can build a project that is both technically strong and aligned with the goals of NexTech CS for Good.
