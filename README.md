@@ -1,19 +1,26 @@
-# NexTech CS for Good - Team Webpage Project
+# NexTech CS for Good - Senior Safety & Digital Literacy App
 
-Welcome to our repository for the NexTech CS for Good project. This project is a collaborative web development effort where our team builds a website to raise awareness, share information, and promote meaningful action around a social issue.
-
-This repository is where we plan, create, review, and improve our webpage as a team using GitHub, version control, and branch-based collaboration.
+Welcome to our repository for the NexTech CS for Good project. We are building an app to help seniors and older adults understand common digital threats, confusing technology concepts, and device settings in plain, accessible language.
 
 ## Project Goal
 
-Our goal is to create a clean, engaging, and accessible webpage that reflects the values of the CS for Good initiative. The project helps us apply web development skills while working together in a realistic team environment.
+Our goal is to create a user-friendly web application that explains:
 
-The project may include files such as:
+- **Common scams** — how to recognize phishing emails, fake tech support calls, and fraudulent schemes
+- **Confusing emails** — what legitimate companies really ask for, how to spot suspicious messages, and what to do if something seems off
+- **Device settings & features** — clear explanations of privacy settings, security features, browser tools, and smartphone functions
+- **Digital safety tips** — practical advice for staying secure online
 
-- README.md — overview and collaboration guide
-- index.html — main webpage structure
-- style.css — page styling and layout
-- app.js — interactive functionality and JavaScript
+By working with seniors, local community centers, and digital literacy advocates, we're building something that makes technology less intimidating and helps protect vulnerable populations from fraud and scams.
+
+## Who We're Building This For
+
+This app is designed for:
+- Seniors and older adults learning to use technology
+- People new to smartphones, email, or the internet
+- Anyone looking for clear, jargon-free explanations of digital safety
+
+The app should be easy to navigate, use large readable text, and explain concepts without technical jargon.
 
 ## Step 1: Clone the Repository
 
@@ -48,6 +55,7 @@ README.md
 index.html
 style.css
 app.js
+assets/
 ```
 
 Once your files are ready, add them to Git:
@@ -83,16 +91,18 @@ git pull origin main
 Then create a feature branch for your task:
 
 ```bash
-git checkout -b feature-homepage
+git checkout -b feature-scam-guide
 ```
 
-You can name branches based on your task, for example:
+You can name branches based on what you're working on, for example:
 
-- feature-homepage
-- feature-about-section
-- feature-contact-form
-- fix-navigation
-- feature-team-page
+- feature-phishing-guide
+- feature-email-safety
+- feature-privacy-settings
+- feature-device-tutorial
+- fix-accessibility
+- feature-search-function
+- feature-senior-center-partnership
 
 This keeps our work organized and makes it easier to review changes later.
 
@@ -100,14 +110,15 @@ This keeps our work organized and makes it easier to review changes later.
 
 Open the project in VS Code or another editor and work on your assigned section.
 
-Each person should focus on their own part of the website, such as:
+Each person might focus on:
 
-- homepage design
-- about section content
-- team member cards
-- donation / call-to-action section
-- contact page or form
-- responsive styling updates
+- Creating content about specific scams (email fraud, fake tech support, romance scams, etc.)
+- Writing explanations of confusing device settings
+- Building interactive tutorials or walkthroughs
+- Designing user-friendly navigation
+- Improving accessibility (large fonts, clear colors, easy-to-read language)
+- Testing with seniors or community partners
+- Building search or filtering features
 
 Because you are working on your own branch, your edits will not affect the main project until you push and merge them.
 
@@ -122,13 +133,13 @@ git add .
 Create a clear commit message:
 
 ```bash
-git commit -m "Added homepage hero section"
+git commit -m "Added phishing email guide with examples"
 ```
 
 Then push your branch to GitHub:
 
 ```bash
-git push origin feature-homepage
+git push origin feature-scam-guide
 ```
 
 Your branch should now appear in the repository for review.
@@ -139,10 +150,11 @@ After pushing your branch, go to the repository on GitHub.
 
 GitHub will usually offer the option to Create a Pull Request. A pull request (PR) allows our team to:
 
-- review the code before it is merged
-- discuss issues or improvements
-- check that the page works correctly
-- make sure new changes fit the project goals
+- review the content and code for clarity and accuracy
+- check that explanations are simple and jargon-free
+- ensure the design is accessible and easy to use
+- test with target users (seniors, community partners)
+- discuss improvements
 - merge updates safely into main
 
 Once teammates review the work and approve it, the PR can be merged into main.
@@ -160,11 +172,11 @@ Team members pull the latest version
         ↓
 Each member creates a branch
         ↓
-Members work on their assigned feature
+Members work on their assigned feature or content
         ↓
 Changes are committed and pushed
         ↓
-Pull requests are reviewed
+Pull requests are reviewed (content, design, accessibility)
         ↓
 Approved changes are merged into main
 ```
@@ -174,14 +186,27 @@ Approved changes are merged into main
 To keep the project smooth and organized, we should:
 
 - pull the latest version before starting work
-- use clear branch names
-- make small, focused commits
-- write descriptive commit messages
-- review pull requests before merging
+- use clear, descriptive branch names
+- make small, focused commits with good messages
+- write content in plain, accessible language
+- test with community partners and target users
+- review pull requests carefully before merging
 - communicate when editing the same file or feature
+- keep accessibility in mind (font size, color contrast, simple language)
 
-This workflow helps us collaborate efficiently while reducing the risk of overwriting each other's work.
+## Content Guidelines
+
+When creating content for this app:
+
+- **Use plain language** — avoid technical terms; if you must use them, explain them simply
+- **Use real examples** — show actual scam emails, screenshots, or common confusion points
+- **Be encouraging** — remind users that it's okay to ask questions and be cautious
+- **Organize clearly** — use short sections, bullet points, and headings
+- **Test with seniors** — whenever possible, ask community partners or seniors to review content
+- **Think accessibility** — use large fonts, good color contrast, and simple navigation
 
 ## Final Note
 
-This project is more than just a webpage — it is an opportunity to apply teamwork, problem-solving, and software development practices in a meaningful CS for Good context. By working together through GitHub and pull requests, we can build a project that is both technically strong and aligned with the goals of NexTech CS for Good.
+This project is more than just an app — it's about protecting vulnerable populations and empowering seniors to use technology safely and confidently. By working together through GitHub and pull requests, and by staying connected to the community we're serving, we can build something meaningful that makes a real difference.
+
+Thank you for being part of NexTech CS for Good! 🌟
