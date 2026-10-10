@@ -62,7 +62,7 @@ Our team of 5 high schoolers is working together to build different parts of the
 - Add features like copy-to-clipboard, print functionality
 - Handle loading states and error messages
 - Work with Aayush to integrate AI results into the frontend
-
+- Basically connects everything together
 ---
 
 ## Project Structure
