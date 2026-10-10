@@ -1,290 +1,283 @@
 # NexTech CS for Good - Senior Safety & Digital Literacy App
 
-Welcome to our repository for the NexTech CS for Good project. We are building an app to help seniors and older adults understand common digital threats, confusing technology concepts, and device settings in plain, accessible language.
+Welcome to our repository for the NexTech CS for Good project. Our team is building a simple web app to help seniors and older adults understand common scams, suspicious emails, and confusing device settings in plain, easy-to-understand language.
 
 ## Project Goal
 
-Our goal is to create a user-friendly web application that explains:
+Our goal is to create an app that helps people learn how to stay safe online without technical jargon. The app should explain:
 
-- **Common scams** — how to recognize phishing emails, fake tech support calls, and fraudulent schemes
-- **Confusing emails** — what legitimate companies really ask for, how to spot suspicious messages, and what to do if something seems off
-- **Device settings & features** — clear explanations of privacy settings, security features, browser tools, and smartphone functions
-- **Digital safety tips** — practical advice for staying secure online
+- Common scams and fraud attempts
+- Suspicious emails and messages
+- Confusing device settings and buttons
+- Basic digital safety tips for everyday use
 
-By working with seniors, local community centers, and digital literacy advocates, we're building something that makes technology less intimidating and helps protect vulnerable populations from fraud and scams.
+This project is meant to be useful, friendly, and easy to understand for people who may not be comfortable with technology.
 
-## Who We're Building This For
+## Who This Is For
 
 This app is designed for:
-- Seniors and older adults learning to use technology
-- People new to smartphones, email, or the internet
-- Anyone looking for clear, jargon-free explanations of digital safety
+- Seniors and older adults
+- People new to phones, email, and the internet
+- Anyone who wants simple explanations of digital safety
 
-The app should be easy to navigate, use large readable text, and explain concepts without technical jargon.
+We want the experience to feel calm, clear, and accessible.
 
-## Team Roles & Responsibilities
+## Team Roles
 
-Our team of 5 high schoolers is working together to build different parts of the app:
+Our team has 5 people, and each person is responsible for a different part of the product:
 
-### **Avaneesh - Homepage & User Interface**
-- Design and build the main landing page
-- Create a clean, welcoming interface that's easy for seniors to understand
-- Build navigation menu and overall site structure
-- Ensure the design is accessible (large fonts, clear colors, simple layout)
+### Avaneesh — Homepage
+- Build the landing page
+- Create a welcoming homepage for the app
+- Make the site easy to understand and visually friendly
 - Add instructions on how to use the app
 
-### **Sanjiv - Input & Upload Page**
-- Create the page where users can submit emails or screenshots for analysis
-- Build file upload functionality (images, text, screenshots)
-- Design a simple, clear form that explains what to upload and why
-- Add validation to check that uploads are valid
-- Include helpful instructions for seniors on how to take screenshots or copy text
+### Sanjiv — Input Page
+- Build the page where users upload screenshots, text, or email content
+- Create the form for entering information
+- Add simple instructions so older users know what to do
+- Make the upload process easy to follow
 
-### **Praneysh - Results & Analysis Page**
-- Build the page that displays analysis results
-- Show a "scam likelihood" percentage or rating (e.g., "This looks 85% likely to be a scam")
-- Display specific warnings or red flags found in the email/content
-- Provide clear explanations of why something is or isn't a scam
-- Add helpful next steps ("What to do if this is a scam")
+### Praneysh — Results Page
+- Build the results page
+- Show a scam score or percentage (example: 85% likely scam)
+- Explain why something seems suspicious
+- Give clear suggestions on what the user should do next
 
-### **Aayush - AI Integration & Leadership**
-- Research and integrate AI tools (like OpenAI's GPT API or Claude API) into the app
-- Build the backend logic that analyzes submitted emails/text for scam indicators
-- Learn how to make API calls and handle responses in JavaScript/backend
-- Lead the team in planning how to use AI effectively
-- Document how the AI analysis works so the team understands it
-- Mentor Darsh on JavaScript best practices
+### Aayush — AI + Leadership
+- Research and learn how to use AI tools like GPT or Claude in a website
+- Help connect the app to AI for scam detection and explanation
+- Lead planning for technical decisions
+- Help the team learn JavaScript and API usage
 
-### **Darsh - JavaScript Development & Enhancement**
-- Learn advanced JavaScript to power interactive features
-- Build form validation and user interaction handling
-- Create smooth transitions between pages
-- Add features like copy-to-clipboard, print functionality
-- Handle loading states and error messages
-- Work with Aayush to integrate AI results into the frontend
-- Basically connects everything together
----
+### Darsh — JavaScript Learning + Support
+- Learn more about JavaScript and website logic
+- Help build interaction on the pages
+- Support features like buttons, form behavior, and page updates
+- Work with Aayush to learn how to connect the frontend to AI tools
 
-## Project Structure
+## Project Flow
 
-Here's how the app will flow:
-
-```
+```text
 Homepage (Avaneesh)
     ↓
-User uploads email/text (Sanjiv)
+Upload / input page (Sanjiv)
     ↓
 AI analyzes content (Aayush)
     ↓
-Results page shows scam likelihood (Praneysh)
+Results page explains the risk (Praneysh)
     ↓
-User gets safety tips & recommendations
+User learns how to stay safe
 ```
 
----
+## Simple Team Workflow
 
-## Step 1: Clone the Repository
+We want this process to stay simple and easy for everyone.
 
-Each team member should begin by downloading the project to their own computer.
+### What we will use
 
-Go to the GitHub repository.
-Click the green Code button.
-Copy the HTTPS link.
-Open your terminal or command prompt.
-Run:
+- VS Code — for editing code
+- GitHub website — for sharing and reviewing code
+- GitHub Desktop (optional) — for people who prefer a simpler interface
 
-```bash
-git clone https://github.com/aayushgupta317/AASDP-CSForGood26-27.git
-```
+We do not need to install many tools. The goal is to keep setup easy.
 
-Then move into the project folder:
+## Step 1: Open the Repository
 
-```bash
-cd AASDP-CSForGood26-27
-```
+One person should set up the project first.
 
-This gives you a local copy of the project so you can work on it from your machine.
+Go to the GitHub repository:
+https://github.com/aayushgupta317/AASDP-CSForGood26-27
 
-## Step 2: Create the Initial Project Files
+Then:
+1. Click the green Code button
+2. Choose the easiest option for you:
+   - Codespaces (browser-based VS Code)
+   - GitHub Desktop
+   - Local VS Code if you already have it installed
 
-The project owner sets up the base structure:
+## Step 2: Everyone Gets the Project
 
-```
-index.html (homepage)
-upload.html (upload/input page)
-results.html (analysis results page)
-style.css (styling for all pages)
-app.js (main JavaScript functionality)
-ai-integration.js (AI/API integration)
-assets/ (images, icons, etc.)
-```
+Each teammate should get the repository on their computer or use Codespaces.
 
-Once files are ready, add them to Git:
+### Option A: Use GitHub Desktop (easy for most people)
 
-```bash
-git add .
-```
+1. Download GitHub Desktop: https://desktop.github.com/
+2. Open GitHub Desktop
+3. Click File → Clone Repository
+4. Search for `aayushgupta317/AASDP-CSForGood26-27`
+5. Choose a folder on your computer
+6. Click Clone
+7. Open the project in VS Code
 
-Create a commit message:
+### Option B: Use Codespaces (browser version)
 
-```bash
-git commit -m "Initial project setup with page structure"
-```
+1. Go to the GitHub repository
+2. Click the green Code button
+3. Click Codespaces
+4. Click Create codespace
+5. VS Code opens in your browser
 
-Then push to main:
+This is a good option if you want to avoid local setup.
 
-```bash
-git push origin main
-```
+### Option C: Use local VS Code only
 
-## Step 3: Work on Separate Branches
+1. Open VS Code
+2. Click File → Open Folder
+3. Open the project folder on your computer
 
-Each team member creates their own feature branch:
+## Step 3: Create Your Own Branch
 
-**Avaneesh:**
+Each person should work on a separate branch so no one overwrites someone else's work.
+
+Examples:
+- Avaneesh: `feature-homepage`
+- Sanjiv: `feature-upload-page`
+- Praneysh: `feature-results-page`
+- Aayush: `feature-ai-integration`
+- Darsh: `feature-javascript-learning`
+
+### In GitHub Desktop:
+1. Click Current Branch
+2. Click New Branch
+3. Enter your branch name
+4. Click Create Branch
+
+### In VS Code Terminal:
 ```bash
 git checkout -b feature-homepage
 ```
 
-**Sanjiv:**
-```bash
-git checkout -b feature-upload-page
-```
+Replace the name with your own branch.
 
-**Praneysh:**
-```bash
-git checkout -b feature-results-page
-```
+## Step 4: Start Working in VS Code
 
-**Aayush:**
-```bash
-git checkout -b feature-ai-integration
-```
+Open the project in VS Code and edit the file(s) assigned to you.
 
-**Darsh:**
-```bash
-git checkout -b feature-javascript-enhancement
-```
+Suggested files:
+- `index.html` — homepage
+- `upload.html` — input page
+- `results.html` — results page
+- `style.css` — shared styling
+- `app.js` — JavaScript logic
+- `ai-integration.js` — AI API work
 
-This keeps everyone's work organized and prevents conflicts.
+Each person should stay focused on their assigned page or task.
 
-## Step 4: Make Your Changes
+## Step 5: Save Your Work
 
-Each person works on their assigned section:
+Whenever you finish a section:
 
-- Pull the latest code frequently (`git pull origin main`)
-- Make your changes in your editor
-- Test your work locally
-- Commit often with clear messages
-- Keep communication open with the team about dependencies
+1. Save the file in VS Code
+2. Open GitHub Desktop or the terminal
+3. Commit your changes
 
-### Important Notes for High Schoolers
+### In GitHub Desktop:
+1. Write a short commit message
+2. Click Commit to [your branch]
+3. Click Push origin
 
-- **Avaneesh**: Focus on making the UI beginner-friendly. Test with family members or seniors if possible.
-- **Sanjiv**: Think about what makes uploading difficult for seniors (small buttons, confusing labels). Test with real screenshots.
-- **Praneysh**: Make the results clear and non-technical. Use simple language, not computer jargon.
-- **Aayush**: Research AI APIs early. Try making test calls to understand how they work. Document everything for the team.
-- **Darsh**: Focus on small, reusable functions. Comment your code so others can understand it.
-
-## Step 5: Save, Commit, and Push
-
-When you finish a section:
-
+### In Terminal:
 ```bash
 git add .
-git commit -m "Descriptive message about what you changed"
-git push origin feature-your-feature-name
+git commit -m "Added homepage section"
+git push origin feature-homepage
 ```
 
-## Step 6: Open a Pull Request
+Use simple, clear commit messages like:
+- Added homepage layout
+- Created upload form
+- Built scam results page
+- Started AI integration
 
-After pushing, create a Pull Request on GitHub so teammates can review your work.
+## Step 6: Pull Requests
 
-A PR allows the team to:
-- Review code and design
-- Suggest improvements
-- Catch bugs or issues
-- Make sure everything works together
-- Test with real users if possible
+After pushing your branch, open the GitHub repository.
 
-Once approved, merge into main.
+GitHub will usually show a button like:
+- Compare & pull request
 
----
+Click it, then:
+1. Add a title
+2. Add a short description of what you changed
+3. Click Create Pull Request
 
-## Roadmap & Next Steps
+The team can review it and then merge it into main.
 
-After we complete the core pages and AI integration, we can add:
+## Step 7: Get Updates from the Team
 
-1. **User Accounts** — let users save their history and get personalized tips
-2. **Learning Modules** — interactive tutorials teaching digital safety
-3. **FAQ Section** — common questions about scams and security
-4. **Mobile App** — convert the website to a mobile-friendly app
-5. **Community Features** — let users share common scams they've seen
-6. **Real-Time Alerts** — notify users about new scams in the news
-7. **Senior Center Integration** — work with local centers to test and gather feedback
-8. **Multi-Language Support** — translate for non-English speakers
-9. **Video Tutorials** — visual guides for specific topics
-10. **Accessibility Features** — voice-over options, text-to-speech, adjustable fonts
+Before you start working, always pull the newest version from GitHub.
 
----
+### In GitHub Desktop:
+- Click Fetch origin
+- Then click Pull origin
 
-## Team Collaboration Guidelines
+### In VS Code Terminal:
+```bash
+git pull origin main
+```
 
-To keep the project smooth and organized, we should:
+This helps everyone stay updated.
 
-- pull the latest version before starting work
-- use clear, descriptive branch names and commit messages
-- make small, focused commits (not huge changes all at once)
-- test your code before pushing
-- ask questions if you're stuck
-- review each other's pull requests carefully
-- keep accessibility in mind (large fonts, clear language, easy navigation)
-- communicate about changes that might affect others' work
+## Project Responsibilities After the Basic Pages Are Done
 
-## Content Guidelines
+Once the main webpage is created, each person can continue doing more work based on their role:
 
-When creating content for this app:
+### Avaneesh
+- Improve the homepage design
+- Make the site more accessible and senior-friendly
+- Add clearer colors, spacing, and instructions
 
-- **Use plain language** — avoid technical terms; if you must use them, explain them simply
-- **Use real examples** — show actual scam emails, screenshots, or common confusion points
-- **Be encouraging** — remind users that it's okay to ask questions and be cautious
-- **Organize clearly** — use short sections, bullet points, and headings
-- **Test with target users** — ask family members or local seniors to try it
-- **Think accessibility** — large fonts, good color contrast, simple navigation
+### Sanjiv
+- Improve upload features
+- Add better instructions for screenshots and pasted text
+- Explore drag-and-drop or file upload improvements
 
----
+### Praneysh
+- Improve the scam score display
+- Add more explanation for risky content
+- Add a friendly explanation section with "why this is risky"
 
-## Resources & Learning
+### Aayush
+- Learn more about JavaScript and AI APIs
+- Connect the app to GPT or Claude
+- Help the team use AI correctly and safely
+- Build technical documentation for the project
 
-### For Aayush (AI Integration):
-- OpenAI API documentation: https://platform.openai.com/docs
-- Claude API (Anthropic): https://claude.ai/api
-- How to make API calls in JavaScript: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
-- Scam detection patterns: research common phishing keywords and scam red flags
+### Darsh
+- Learn JavaScript deeply
+- Help refine app interactions and page logic
+- Support the team with frontend features and debugging
+- Work on making the app smoother and more responsive
 
-### For Darsh (JavaScript):
-- MDN Web Docs: https://developer.mozilla.org/en-US/docs/Web/JavaScript
-- JavaScript Promises & Async/Await: Learn how to handle AI API responses
-- DOM Manipulation: https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model
-- Form Handling & Validation
+## Good Team Habits
 
-### For Everyone:
-- GitHub Basics: https://guides.github.com/
-- HTML/CSS Fundamentals (if needed)
-- Accessibility Guidelines: https://www.w3.org/WAI/fundamentals/
+To keep the project simple and organized, everyone should:
 
----
+- Work on their own branch
+- Save work often
+- Push changes regularly
+- Communicate when they finish a feature
+- Pull the latest version before starting work
+- Review each other's code before merging
+
+## Suggestions for the App
+
+Here are some ideas the team can consider after the basic version is finished:
+
+- Add a large-font mode for accessibility
+- Add clear scam examples with red flags
+- Add a button explaining what to do if the message looks suspicious
+- Add help text for seniors using phones or email
+- Add a safe "learn more" section about common scams
+- Add a feature where users can paste text from an email
+- Add a way to show multiple scam indicators in simple language
+- Add simple colors like green for safe, yellow for caution, red for scam
 
 ## Final Note
 
-This project is more than just an app — it's about protecting vulnerable populations and empowering seniors to use technology safely and confidently. As high schoolers, you're gaining real-world experience in:
+This project is not just about building a website — it is about using technology to help people stay safe online. Our goal is to make this app easy to use, useful to seniors, and clear enough that people feel supported instead of confused.
 
-- **Teamwork** — coordinating across 5 people with different roles
-- **Software development** — building a real web application
-- **Problem-solving** — debugging, testing, and improving code
-- **Social impact** — creating something that genuinely helps people
-- **AI & technology** — learning cutting-edge tools like GPT and Claude
+By working together and keeping the process simple, we can build something meaningful and helpful.
 
-By working together through GitHub, communicating clearly, and staying connected to the problem you're solving, you can build something meaningful that makes a real difference.
-
-Thank you for being part of NexTech CS for Good! 🌟
+Thank you for being part of NexTech CS for Good.
