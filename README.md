@@ -158,7 +158,7 @@ git status
 
 If it says the repo is clean, you are ready to work.
 
-> **Important Announcement:** CREARE YOUR OWN BRANCH THE REPOSITORY AFTER CLONING IT
+> **Important Announcement:** CREARE YOUR OWN BRANCH INSIDE THE REPOSITORY AFTER CLONING IT
 
 ### Step 4: Create a Branch Only After the Repo Is Correct
 
