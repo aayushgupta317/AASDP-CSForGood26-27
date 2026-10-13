@@ -2,6 +2,9 @@
 
 Welcome to the NexTech CS for Good repository. This project is a simple web app designed to help seniors and older adults understand common scams, suspicious emails, confusing device settings, and digital safety basics in plain language.
 
+[!NOTE]
+> **Important Announcement:** CLONE THE REPOSITORY FIRST
+
 ## Project Goal
 
 Our goal is to create a web app that helps people learn how to stay safe online without technical jargon. The app should explain:
