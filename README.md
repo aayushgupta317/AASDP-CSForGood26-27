@@ -1,9 +1,7 @@
 # NexTech CS for Good - Senior Safety & Digital Literacy App (Scan-A-Scam)
+> **Important Announcement:** CLONE THE REPOSITORY FIRST
 
 Welcome to the NexTech CS for Good repository. This project is a simple web app designed to help seniors and older adults understand common scams, suspicious emails, confusing device settings, and digital safety basics in plain language.
-
-[!NOTE]
-> **Important Announcement:** CLONE THE REPOSITORY FIRST
 
 ## Project Goal
 
