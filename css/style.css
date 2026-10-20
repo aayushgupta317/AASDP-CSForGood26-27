@@ -2,53 +2,144 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    scroll-behavior: smooth;
 }
 
-body {}
+body {
+    color: rgb(7, 224, 195);
+    font-family: quantico;
+}
 
 /* Header */
 nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: rgb(61, 16, 184);
-    padding: 10px;
+    background-color: #1c2688;
+    padding-right: 100px;
+    padding-left: 30px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .nav-links {
     display: flex;
-    gap: 20px;
+    gap: 40px;
+}
+
+a{
+    color: rgb(7, 224, 195);
+    font-size: x-large;
+}
+
+a:hover{
+    transform: scale(1.35);
+    color: aliceblue;
+    transition: .1s;
 }
 
 .hero {
+    font-size: xx-large;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 30px;
-    background-color: rgb(30, 136, 223);
+    background-color: #1f69d8;
+    border-top: 8px solid rgb(7, 224, 195);
+    border-bottom: 8px solid rgb(7, 224, 195);
 }
 
-/*main*/
-.card-container {
-    display: grid;
-    gap: 5px;
-    margin: 10px;
-}
-
+/* Main */
 .card {
+    font-size: larger;
     display: flex;
     flex-direction: column;
     text-align: center;
     align-items: center;
     justify-content: center;
-    border: 5px solid;
+    border: 8px solid;
     border-radius: 20px;
-    padding: 20px;
+    padding: 50px;
+    background-color: #1c2688;
 }
 
 .card h1,
 p,
 ul {
     padding: 10px;
+}
+
+#about {
+    grid-area: top;
+}
+
+#how {
+    grid-area: mid;
+}
+
+#beyond {
+    grid-area: bot;
+}
+
+.card-container {
+    background-color: #1c2688;
+    display: grid;
+    gap: 5px;
+    padding: 60px 60px 60px 60px;
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+    "top"
+    "mid"
+    "bot";
+}
+
+@media (min-width: 768px) {
+    .card-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+        grid-template-areas: 
+            "top top"
+            "mid bot";
+    }
+}
+
+@media (min-width: 1024px) {
+    .card-container {
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-areas: 
+            "top top ."
+            ". mid mid"
+            "bot bot .";
+    }
+
+}
+
+/* footer*/
+
+.try{
+    background-color: #1f69d8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 50px;
+    font-size: x-large;
+    gap: 20px;
+}
+
+.try button {
+    cursor: pointer;
+    color: rgb(7, 224, 195);
+    padding: 30px;
+    background-color: #1c2688;
+    font-size: xx-large;
+    font-family: quantico;
+    border: 7px solid ;
+    border-radius: 30px;
+}
+
+.try button:hover{
+    font-size: 4vh;
+    transition: .1s;
 }
