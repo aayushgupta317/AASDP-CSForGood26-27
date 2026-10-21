@@ -15,7 +15,7 @@ nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #1c2688;
+    background-color: #172074;
     padding-right: 100px;
     padding-left: 30px;
     padding-top: 20px;
@@ -28,7 +28,7 @@ nav {
 }
 
 a{
-    color: rgb(7, 224, 195);
+    color: rgb(2, 255, 221);
     font-size: x-large;
 }
 
@@ -129,7 +129,7 @@ ul {
 
 .try button {
     cursor: pointer;
-    color: rgb(7, 224, 195);
+    color: rgb(0, 255, 221);
     padding: 30px;
     background-color: #1c2688;
     font-size: xx-large;
