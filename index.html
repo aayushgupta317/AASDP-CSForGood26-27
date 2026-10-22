@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scan-A-Scam - Scanner</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <img src="logo.png" width="150" alt="Scan-A-Scam Logo">
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+            </div>
+        </nav>
+
+        <section class="hero">
+            <h1>Scam Scanner</h1>
+            <p>Paste text or email content below to check for threats</p>
+        </section>
+    </header>
+
+    <main>
+        <div class="scanner-container">
+            <section class="card">
+                <h2>Paste Text or Email Content</h2>
+                <p>Paste suspicious messages or full email contents here:</p>
+                <textarea placeholder="Paste message here..."></textarea>
+            </section>
+
+            <section class="card">
+                <h2>Upload Screenshot</h2>
+                <p>Upload a screenshot of the suspicious message:</p>
+                <input type="file">
+            </section>
+        </div>
+
+        <div class="try">
+            <h2>Ready to Verify?</h2>
+            <button>Scan Content</button>
+        </div>
+    </main>
+</body>
+</html>
