@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/style.css">
 
     <title>Scan-A-Scam | Results</title>
+
+    <!-- Main website stylesheet -->
+    <link rel="stylesheet" href="../css/style.css">
 
     <style>
         * {
@@ -108,8 +111,19 @@
             font-weight: bold;
         }
 
-        .button:hover {
+        .button:hover,
+        .button:focus {
             background-color: #0f2945;
+        }
+
+        .button:focus {
+            outline: 3px solid #fbbf24;
+            outline-offset: 3px;
+        }
+
+        .sample-note {
+            color: #4b5563;
+            font-size: 0.95rem;
         }
 
         footer {
@@ -143,25 +157,36 @@
 
     <main>
 
-        <!-- Scam result -->
+        <!-- Scam analysis result -->
         <section class="card result-title">
             <h2>Analysis Complete</h2>
             <p>Here's what we found.</p>
 
-            <div class="risk-badge">
-                <!-- Placeholder until the AI is connected -->
-                <p class="risk-score" id="risk-score">85%</p>
-                <p class="risk-label" id="risk-level">
+            <div
+                class="risk-badge"
+                role="status"
+                aria-live="polite"
+            >
+                <p
+                    class="risk-score"
+                    id="risk-score"
+                >
+                    85%
+                </p>
+
+                <p
+                    class="risk-label"
+                    id="risk-level"
+                >
                     Likely Scam
                 </p>
             </div>
 
-            <p>
+            <p class="sample-note">
                 This is currently a sample result.
                 The final score will come from the scam analysis system.
             </p>
         </section>
-
 
         <!-- Reasons -->
         <section class="card">
@@ -170,23 +195,30 @@
             <ul id="risk-reasons">
                 <li>The message asks you to act quickly.</li>
                 <li>The sender may be unfamiliar.</li>
-                <li>The message may be asking for personal information.</li>
+                <li>
+                    The message may be asking for personal information.
+                </li>
             </ul>
         </section>
 
-
-        <!-- Recommended action -->
-        <section class="card">
+        <!-- Recommended actions -->
             <h2>What should you do?</h2>
 
             <ul id="recommendations">
                 <li>Do not click suspicious links.</li>
-                <li>Do not give out passwords or personal information.</li>
+
+                <li>
+                    Do not give out passwords or personal information.
+                </li>
+
                 <li>
                     Contact the company or person through a method
                     you already trust.
                 </li>
-                <li>Ask someone you trust if you are unsure.</li>
+
+                <li>
+                    Ask someone you trust if you are unsure.
+                </li>
             </ul>
 
             <div class="warning">
@@ -195,8 +227,7 @@
             </div>
         </section>
 
-
-        <!-- Try another -->
+        <!-- Return to upload page -->
         <div class="button-container">
             <a class="button" href="upload.html">
                 Check Another Message
@@ -210,4 +241,5 @@
     </footer>
 
 </body>
+
 </html>
