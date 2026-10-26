@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Scan-A-Scam | Results</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="results-page">
+
+    <header class="results-header">
+        <h1>Scan-A-Scam</h1>
+        <p>Helping you stay safe online</p>
+    </header>
+
+    <main class="results-container">
+
+        <!-- Scam result -->
+        <section class="results-card results-title">
+            <h2>Analysis Complete</h2>
+            <p>Here's what we found.</p>
+
+            <div
+                class="results-risk-badge"
+                role="status"
+                aria-live="polite"
+            >
+                <p
+                    class="results-risk-score"
+                    id="risk-score"
+                >
+                    85%
+                </p>
+
+                <p
+                    class="results-risk-label"
+                    id="risk-level"
+                >
+                    Likely Scam
+                </p>
+            </div>
+
+            <p class="results-sample-note">
+                This is currently a sample result.
+                The final score will come from the scam analysis system.
+            </p>
+        </section>
+
+        <!-- Reasons -->
+        <section class="results-card">
+            <h2>Why does this look suspicious?</h2>
+
+            <ul id="risk-reasons">
+                <li>The message asks you to act quickly.</li>
+                <li>The sender may be unfamiliar.</li>
+                <li>The message may be asking for personal information.</li>
+            </ul>
+        </section>
+
+        <!-- Recommended actions -->
+        <section class="results-card">
+            <h2>What should you do?</h2>
+
+            <ul id="recommendations">
+                <li>Do not click suspicious links.</li>
+                <li>Do not give out passwords or personal information.</li>
+                <li>
+                    Contact the company or person through a method
+                    you already trust.
+                </li>
+                <li>Ask someone you trust if you are unsure.</li>
+            </ul>
+
+            <div class="results-warning">
+                <strong>Remember:</strong>
+                It is okay to stop and check before responding.
+            </div>
+        </section>
+
+        <!-- Return to upload page -->
+        <div class="results-button-container">
+            <a class="results-button" href="upload.html">
+                Check Another Message
+            </a>
+        </div>
+
+    </main>
+
+    <footer class="results-footer">
+        <p>Scan-A-Scam • NexTech CS for Good</p>
+    </footer>
+
+</body>
+
+</html>
+/* ============================= */
+/* Scan-A-Scam Results Page      */
+/* ============================= */
+
+.results-page {
+    margin:*0;
+    font-family: Arial, Helveti*a, sans-serif;
+    background-colo*: #f4f7fb;
+    color: #1f2937;
+}
+
+*results-page * {
+    box-sizing: b*rder-box;
+}
+
+.results-header {
+   *background-color: #173b63;
+    col*r: white;
+    padding: 22px;
+    t*xt-align: center;
+}
+
+.results-head*r h1 {
+    margin: 0;
+    font-siz*: 2rem;
+}
+
+.results-header p {
+   *margin: 8px 0 0;
+}
+
+.results-conta*ner {
+    width: 90%;
+    max-widt*: 750px;
+    margin: 35px auto;
+}
+*.results-card {
+    background-col*r: white;
+    border-radius: 14px;*    padding: 28px;
+    margin-bott*m: 22px;
+    box-shadow: 0 4px 14p* rgba(0, 0, 0, 0.08);
+}
+
+.results-*itle {
+    text-align: center;
+}
+
+*results-card h2 {
+    color: #173b*3;
+}
+
+.results-card li {
+    font-*ize: 1.1rem;
+    line-height: 1.7;*    margin-bottom: 8px;
+}
+
+.result*-risk-badge {
+    background-color* #fee2e2;
+    border: 3px solid #d*2626;
+    border-radius: 12px;
+   *padding: 22px;
+    margin: 20px 0;*    text-align: center;
+}
+
+.result*-risk-score {
+    color: #b91c1c;
+*   font-size: 2.5rem;
+    font-wei*ht: bold;
+    margin: 0;
+}
+
+.resul*s-risk-label {
+    font-size: 1.3r*m;
+    font-weight: bold;
+    marg*n: 6px 0 0;
+}
+
+.results-sample-not* {
+    color: #4b5563;
+    font-si*e: 0.95rem;
+}
+
+.results-warning {
+*   background-color: #fff7d6;
+    *order-left: 5px solid #e5a500;
+   *padding: 16px;
+    margin-top: 20p*;
+}
+
+.results-button-container {
+ *  text-align: center;
+    margin-t*p: 30px;
+}
+
+.results-button {
+    *isplay: inline-block;
+    backgrou*d-color: #173b63;
+    color: white*
+    padding: 14px 24px;
+    borde*-radius: 8px;
+    text-decoration:*none;
+    font-size: 1.1rem;
+    f*nt-weight: bold;
+}
+
+.results-butto*:hover,
+.results-button:focus {
+  * background-color: #0f2945;
+}
+
+.results-button:focus {
+    outline: 3px solid #fbbf24;
+    outline-offset: 3px;
+}
+
+.results-footer {
+    text-align: center;
+    color: #6b7280;
+    padding: 20px;
+}
+
+@media (max-width: 600px) {
+    .results-container {
+        width: 94%;
+    }
+
+    .results-card {
+        padding: 20px;
+    }
+
+    .results-risk-score {
+        font-size: 2rem;
+    }
+}
