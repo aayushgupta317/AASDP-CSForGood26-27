@@ -6,7 +6,7 @@
 }
 
 body {
-    color: rgb(7, 224, 195);
+    color: rgb(21, 253, 222);
     font-family: quantico;
 }
 
@@ -50,6 +50,10 @@ a:hover{
     
 }
 
+a {
+    text-decoration: none;
+}
+
 .hero button {
     cursor: pointer;
     color: rgb(0, 255, 221);
@@ -77,7 +81,7 @@ a:hover{
     border: 8px solid;
     border-radius: 20px;
     padding: 50px;
-    background-color: #1c2688;
+    background-color: #414bb6;
 }
 
 .card h1,
