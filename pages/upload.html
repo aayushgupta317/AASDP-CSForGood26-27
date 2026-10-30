@@ -1,70 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scan-A-Scam | Upload</title>
-
-    <!-- Google Font: Quantico -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-
+    <title>Scan-A-Scam - Scanner</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+    </style>
     <link rel="stylesheet" href="upload.css">
 </head>
-
-<body class="upload-page">
-<header class="upload-header">
+<body>
+    <header>
+    <header class="results-header">
         <img src="logo.png" alt="" width="120">
         <h1>Scan-A-Scam</h1>
     </header>
 
-    <main class="upload-container">
+        <section class="hero">
+            <h1>Scam Scanner</h1>
+            <p>Paste text or email content below to check for threats</p>
+        </section>
+    </header>
 
-        <form action="results.html" method="GET" class="upload-form">
-
-            <!-- Option 1: Paste Text -->
-            <section class="upload-card">
-                <h2>Option 1: Paste Suspicious Text</h2>
-                <p>Paste the text message, email body, or DM you received below:</p>
-                <textarea 
-                    name="scam-text" 
-                    id="scam-text" 
-                    rows="6" 
-                    placeholder="e.g. 'URGENT: Your bank account is locked! Click here to verify...'"></textarea>
+    <main>
+        <div class="scanner-container">
+            <section class="card">
+                <h2>Paste Text or Email Content</h2>
+                <p>Paste suspicious messages or full email contents here:</p>
+                <textarea placeholder="Paste message here..."></textarea>
             </section>
 
-            <!-- Divider -->
-            <div class="upload-divider">
-                <span>OR</span>
-            </div>
-
-            <!-- Option 2: Upload Screenshot -->
-            <section class="upload-card">
-                <h2>Option 2: Upload a Screenshot</h2>
-                <p>Upload an image or screenshot of the message (PNG, JPG, JPEG):</p>
-                
-                <label for="scam-file" class="file-dropzone">
-                    <span class="file-icon">&#128247;</span>
-                    <span class="file-label">Choose an image file</span>
-                    <input type="file" id="scam-file" name="scam-image" accept="image/*">
-                </label>
+            <section class="card">
+                <h2>Upload Screenshot</h2>
+                <p>Upload a screenshot of the suspicious message:</p>
+                <input type="file" accept="image/*">
             </section>
+        </div>
 
-            <!-- Submit Button -->
-            <div class="upload-button-container">
-                <button type="submit" class="upload-button">Scan For Scams</button>
-            </div>
-
-        </form>
-
+       <div class="try">
+            <h2>Ready to Verify?</h2>
+            <a href="results.html" class="scan-button">Scan Content</a>
+        </div>
     </main>
-
-    <footer class="upload-footer">
-        <p>Scan-A-Scam • NexTech CS for Good</p>
-    </footer>
-
 </body>
-
+</html>
+    </main>
+</body>
 </html>
