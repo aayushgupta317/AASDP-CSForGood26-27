@@ -1,163 +1,166 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+@import url("style.css");
 
 body {
-    color: rgb(7, 224, 195);
-    font-family: quantico;
-    background-color: #172074;
+    background: var(--color-surface);
+    min-width: 0;
 }
 
-/* Navigation */
 .results-header {
     display: flex;
-    justify-content: center;
     align-items: center;
-    background-color: #172074;
-    color: #15fdde;
+    justify-content: center;
+    gap: var(--space-3);
+    padding: var(--space-5) var(--space-4);
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-text);
     text-align: center;
-    padding: 30px 20px;
-    border-bottom: 6px solid #00ffdd;
 }
 
+.results-header img {
+    width: 120px;
+    max-width: 30%;
+    height: auto;
+}
 
+.results-header h1 {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+}
 
-/* Hero Section */
 .hero {
-    font-size: xx-large;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 30px;
-    background-color: #1f69d8;
+    padding: clamp(2.5rem, 7vw, 4.5rem) var(--space-4);
+    background: linear-gradient(135deg, var(--color-primary-soft), var(--color-surface));
     text-align: center;
+}
+
+.hero h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    letter-spacing: -0.03em;
 }
 
 .hero p {
-    font-size: large;
-    padding-top: 10px;
+    margin-top: var(--space-2);
+    color: var(--color-text-muted);
 }
 
-/* Main Cards */
 .scanner-container {
-    background-color: #1c2688;
     display: grid;
-    gap: 20px;
-    padding: 60px;
-    grid-template-columns: 1fr;
-}
-
-@media (min-width: 768px) {
-    .scanner-container {
-        grid-template-columns: 1fr 1fr;
-    }
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-5);
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: clamp(2rem, 6vw, 4rem) var(--space-4);
+    background: var(--color-surface);
 }
 
 .card {
-    font-size: larger;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    border: 8px solid rgb(7, 224, 195);
-    border-radius: 20px;
-    padding: 40px;
-    background-color: #1c2688;
+    min-width: 0;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-sm);
 }
 
-.card h2,
-.card p {
-    padding: 10px;
+.card h2 {
+    font-size: 1.3rem;
 }
 
 .card p {
-    font-size: medium;
+    margin-top: var(--space-2);
+    color: var(--color-text-muted);
 }
 
-/* Text Input Styled */
-textarea {
+textarea,
+input[type="file"] {
+    display: block;
     width: 100%;
-    height: 140px;
-    background-color: #172074;
-    color: rgb(7, 224, 195);
-    border: 3px solid rgb(7, 224, 195);
-    border-radius: 12px;
-    font-family: quantico;
-    font-size: medium;
-    padding: 12px;
-    outline: none;
+    margin-top: var(--space-5);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+    color: var(--color-text);
+}
+
+textarea {
+    min-height: 10rem;
+    padding: var(--space-3);
     resize: vertical;
 }
 
-textarea:focus {
-    box-shadow: 0 0 12px rgb(7, 224, 195);
+textarea::placeholder {
+    color: #738096;
 }
 
-/* File Upload Styled */
+textarea:focus,
+input[type="file"]:focus {
+    border-color: var(--color-primary);
+    outline: none;
+    box-shadow: var(--focus-ring);
+}
+
 input[type="file"] {
-    color: rgb(7, 224, 195);
-    font-family: quantico;
-    font-size: medium;
-    padding: 12px;
-    background-color: #172074;
-    border: 3px dashed rgb(7, 224, 195);
-    border-radius: 12px;
-    width: 100%;
+    padding: var(--space-2);
     cursor: pointer;
 }
 
 input[type="file"]::file-selector-button {
-    font-family: quantico;
-    background-color: #1c2688;
-    color: rgb(0, 255, 221);
-    border: 2px solid rgb(0, 255, 221);
-    border-radius: 8px;
-    padding: 8px 16px;
-    margin-right: 15px;
+    margin-right: var(--space-3);
+    padding: var(--space-2) var(--space-3);
+    border: 0;
+    border-radius: var(--radius-sm);
+    background: var(--color-primary-soft);
+    color: var(--color-primary-dark);
     cursor: pointer;
-    font-size: small;
+    font-weight: 700;
 }
 
 input[type="file"]::file-selector-button:hover {
-    background-color: rgb(7, 224, 195);
-    color: #172074;
+    background: #d5e5ff;
 }
 
-/* Footer Section */
 .try {
-    background-color: #1f69d8;
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-7) var(--space-4);
+    background: var(--color-surface-muted);
+    color: var(--color-text);
     text-align: center;
-    padding: 50px;
-    font-size: x-large;
-    gap: 20px;
 }
 
-.try .scan-button {
-    cursor: pointer;
-    color: rgb(0, 255, 221);
-    background-color: #1c2688;
-    padding: 15px 40px;
-    font-size: xx-large;
-    font-family: quantico;
-    text-decoration: none;
-    display: inline-block;
-    border: 7px solid rgb(0, 255, 221);
-    border-radius: 30px;
-    transition: transform 0.15s ease, background-color 0.15s ease;
+.try h2 {
+    font-size: 1.5rem;
 }
 
-.try .scan-button:hover {
-    background-color: #172074;
-    transform: scale(1.05);
+.scan-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3rem;
+    padding: var(--space-3) var(--space-5);
+    border-radius: var(--radius-sm);
+    background: var(--color-primary);
+    color: #fff;
+    font-weight: 700;
+    box-shadow: var(--shadow-sm);
+    transition: background-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
 }
 
-.try .scan-button:active {
-    transform: scale(0.98);
+.scan-button:hover {
+    background: var(--color-primary-dark);
+    box-shadow: var(--shadow-md);
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+.scan-button:active {
+    transform: translateY(0);
+}
+
+@media (max-width: 700px) {
+    .scanner-container {
+        grid-template-columns: 1fr;
+    }
 }
