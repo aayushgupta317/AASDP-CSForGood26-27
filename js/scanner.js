@@ -1,548 +1,363 @@
 (function () {
     "use strict";
 
-    var MAX_MESSAGE_LENGTH = 20000;
+    const MAX_MESSAGE_LENGTH = 20000;
+    const STORAGE_KEY = "scanAScam:lastResult";
 
-    function firstMatch(root, selectors) {
-        for (var i = 0; i < selectors.length; i += 1) {
-            var found = root.querySelector(selectors[i]);
-            if (found) return found;
+    function createElement(tag, className, text) {
+        const element = document.createElement(tag);
+
+        if (className) {
+            element.className = className;
         }
-        return null;
-    }
 
-    function make(tag, className, text) {
-        var node = document.createElement(tag);
-        if (className) node.className = className;
-        if (typeof text === "string") node.textContent = text;
-        return node;
+        if (typeof text === "string") {
+            element.textContent = text;
+        }
+
+        return element;
     }
 
     function initializeScanner() {
-        var container = document.querySelector("[data-scam-scanner], .scanner-container");
-        if (!container) return;
+        const container = document.querySelector(".scanner-container");
 
-        var Security = window.ScanAScamSecurity;
-        var analyzer = window.ScamAnalyzer;
-
-        var messageInput = firstMatch(container, [
-            "#messageInput",
-            "#message",
-            "#messageText",
-            "[name='message']",
-            "textarea"
-        ]);
-
-        var imageInput = firstMatch(container, [
-            "#imageInput",
-            "#screenshotInput",
-            "#imageUpload",
-            "input[type='file']"
-        ]);
-
-        var scanButton = firstMatch(container, [
-            "#scanButton",
-            "#analyzeButton",
-            ".scan-button",
-            "button[type='submit']"
-        ]);
-
-        if (!messageInput || !scanButton) {
-            console.warn(
-                "Scan-A-Scam: the scanner needs a textarea and a scan button inside .scanner-container."
-            );
+        if (!container || container.dataset.scanInitialized === "true") {
             return;
         }
 
-        var form = messageInput.closest("form");
+        container.dataset.scanInitialized = "true";
 
-        var resultRegion = make("section", "scan-results");
-        resultRegion.id = "scanResults";
-        resultRegion.setAttribute("aria-live", "polite");
-        resultRegion.setAttribute("aria-atomic", "true");
-        resultRegion.hidden = true;
-        container.appendChild(resultRegion);
+        // Locate the elements in the original upload.html.
+        const messageInput = container.querySelector("textarea");
 
-        var statusRegion = make("p", "scan-status");
-        statusRegion.setAttribute("role", "status");
-        statusRegion.setAttribute("aria-live", "polite");
-        container.appendChild(statusRegion);
-
-        var counter = make(
-            "p",
-            "scan-character-count",
-            "0 / " + MAX_MESSAGE_LENGTH
+        const imageInput = container.querySelector(
+            'input[type="file"]'
         );
 
-        counter.setAttribute("aria-live", "polite");
-        messageInput.insertAdjacentElement("afterend", counter);
+        // The original Scan Content link is outside the scanner container.
+        const scanButton = document.querySelector(".scan-button");
 
-        var fileStatus = make("p", "scan-file-status", "");
+        if (!messageInput || !scanButton) {
+            console.error(
+                "Scan-A-Scam: Missing message input or scan button."
+            );
 
-        if (imageInput) {
-            imageInput.insertAdjacentElement("afterend", fileStatus);
+            return;
         }
 
-        var clearButton = firstMatch(container, [
-            "#clearButton",
-            ".clear-button",
-            "[data-action='clear']"
-        ]);
+        const Security = window.ScanAScamSecurity;
+        const analyzer = window.ScamAnalyzer;
+        const imageReader = window.ScanAScamImageReader;
 
-        var busy = false;
+        const statusRegion = createElement(
+            "p",
+            "scanner-status",
+            ""
+        );
 
-        function updateCounter() {
-            var length = messageInput.value.length;
+        statusRegion.setAttribute("role", "status");
+        statusRegion.setAttribute("aria-live", "polite");
 
-            counter.textContent =
-                length.toLocaleString() +
-                " / " +
-                MAX_MESSAGE_LENGTH.toLocaleString() +
-                " characters";
+        statusRegion.style.gridColumn = "1 / -1";
 
-            counter.classList.toggle(
-                "is-over-limit",
-                length > MAX_MESSAGE_LENGTH
+        container.appendChild(statusRegion);
+
+        let isScanning = false;
+
+        const originalButtonText =
+            scanButton.textContent.trim() || "Scan Content";
+
+        function setStatus(message, isError) {
+            statusRegion.textContent = message;
+
+            statusRegion.classList.toggle(
+                "is-error",
+                Boolean(isError)
             );
         }
 
-        function setStatus(message, isError) {
-            statusRegion.textContent = message || "";
-            statusRegion.classList.toggle("is-error", Boolean(isError));
-        }
+        function setBusy(value) {
+            isScanning = value;
 
-        function setBusy(value, label) {
-            busy = value;
-            scanButton.disabled = value;
+            scanButton.setAttribute(
+                "aria-disabled",
+                value ? "true" : "false"
+            );
 
-            if (!scanButton.dataset.originalLabel) {
-                scanButton.dataset.originalLabel =
-                    scanButton.textContent.trim() || "Scan message";
-            }
+            scanButton.style.pointerEvents = value
+                ? "none"
+                : "";
 
             scanButton.textContent = value
-                ? (label || "Scanning…")
-                : scanButton.dataset.originalLabel;
+                ? "Analyzing Message..."
+                : originalButtonText;
 
-            container.setAttribute(
+            scanButton.setAttribute(
                 "aria-busy",
                 value ? "true" : "false"
             );
         }
 
-        function showError(message) {
-            resultRegion.hidden = false;
-            resultRegion.replaceChildren();
-
-            resultRegion.appendChild(
-                make("h2", "scan-results-heading", "Unable to scan message")
-            );
-
-            resultRegion.appendChild(
-                make("p", "scan-error", message)
-            );
-        }
-
-        function formatResultText(result) {
-            var lines = [
-                "Scan-A-Scam results",
-                "Risk score: " + result.score + "/100",
-                "Risk level: " + result.riskLevel.toUpperCase(),
-                "Assessment: " + result.verdict,
-                "",
-                "Warning signs:"
-            ];
-
-            if (!result.findings.length) {
-                lines.push(
-                    "No specific warning signs matched the current checks."
-                );
-            }
-
-            result.findings.forEach(function (finding) {
-                lines.push(
-                    "- " + finding.title + ": " + finding.detail
-                );
-            });
-
-            lines.push("", "Recommended actions:");
-
-            result.recommendations.forEach(function (item) {
-                lines.push("- " + item);
-            });
-
-            lines.push(
-                "",
-                result.disclaimer ||
-                "This result is an automated estimate, not proof that a message is safe or fraudulent."
-            );
-
-            return lines.join("\n");
-        }
-
-        function renderResult(result) {
-            resultRegion.replaceChildren();
-            resultRegion.hidden = false;
-
-            resultRegion.classList.remove(
-                "risk-low",
-                "risk-medium",
-                "risk-high"
-            );
-
-            resultRegion.classList.add("risk-" + result.riskLevel);
-
-            resultRegion.appendChild(
-                make("h2", "scan-results-heading", "Your scan results")
-            );
-
-            resultRegion.appendChild(
-                make("p", "scan-verdict", result.verdict)
-            );
-
-            var badge = make("div", "scan-risk-badge");
-
-            var score = make(
-                "strong",
-                "scan-risk-score",
-                String(result.score)
-            );
-
-            var outOf = make(
-                "span",
-                "scan-risk-out-of",
-                "/100"
-            );
-
-            var label = make(
-                "span",
-                "scan-risk-label",
-                result.riskLevel.charAt(0).toUpperCase() +
-                result.riskLevel.slice(1) +
-                " risk"
-            );
-
-            badge.append(score, outOf, label);
-
-            var meter = make("div", "scan-risk-meter");
-
-            meter.setAttribute("role", "meter");
-            meter.setAttribute("aria-label", "Estimated risk score");
-            meter.setAttribute("aria-valuemin", "0");
-            meter.setAttribute("aria-valuemax", "100");
-            meter.setAttribute(
-                "aria-valuenow",
-                String(result.score)
-            );
-
-            var fill = make("span", "scan-risk-meter-fill");
-
-            fill.style.width =
-                Math.max(0, Math.min(100, result.score)) + "%";
-
-            meter.appendChild(fill);
-            badge.appendChild(meter);
-            resultRegion.appendChild(badge);
-
-            resultRegion.appendChild(
-                make(
-                    "h3",
-                    "scan-section-heading",
-                    "Warning signs found"
-                )
-            );
-
-            if (result.findings.length) {
-                var findingsList = make("ul", "scan-findings");
-
-                result.findings.forEach(function (finding) {
-                    var item = make("li", "scan-finding");
-
-                    item.appendChild(
-                        make("strong", "", finding.title)
-                    );
-
-                    item.appendChild(
-                        make("p", "", finding.detail)
-                    );
-
-                    findingsList.appendChild(item);
-                });
-
-                resultRegion.appendChild(findingsList);
-            } else {
-                resultRegion.appendChild(
-                    make(
-                        "p",
-                        "scan-no-findings",
-                        "No warning signs matched the current checks. That does not guarantee the message is legitimate."
-                    )
-                );
-            }
-
-            resultRegion.appendChild(
-                make(
-                    "h3",
-                    "scan-section-heading",
-                    "What to do next"
-                )
-            );
-
-            var recommendations = make(
-                "ul",
-                "scan-recommendations"
-            );
-
-            result.recommendations.forEach(function (recommendation) {
-                recommendations.appendChild(
-                    make("li", "", recommendation)
-                );
-            });
-
-            resultRegion.appendChild(recommendations);
-
-            resultRegion.appendChild(
-                make(
-                    "p",
-                    "scan-disclaimer",
-                    result.disclaimer ||
-                    "This automated result can make mistakes. Verify unexpected requests independently."
-                )
-            );
-
-            var actions = make("div", "scan-result-actions");
-
-            var copyButton = make(
-                "button",
-                "scan-button scan-copy-button",
-                "Copy results"
-            );
-
-            copyButton.type = "button";
-
-            copyButton.addEventListener("click", async function () {
-                var content = formatResultText(result);
-
-                try {
-                    if (
-                        navigator.clipboard &&
-                        window.isSecureContext
-                    ) {
-                        await navigator.clipboard.writeText(content);
-                    } else {
-                        var temporary = make(
-                            "textarea",
-                            "scan-copy-fallback"
-                        );
-
-                        temporary.value = content;
-                        temporary.setAttribute("readonly", "readonly");
-                        temporary.style.position = "fixed";
-                        temporary.style.opacity = "0";
-
-                        document.body.appendChild(temporary);
-                        temporary.select();
-
-                        var copied = document.execCommand("copy");
-
-                        temporary.remove();
-
-                        if (!copied) {
-                            throw new Error(
-                                "Copy is unavailable in this browser."
-                            );
-                        }
-                    }
-
-                    copyButton.textContent = "Copied!";
-
-                    window.setTimeout(function () {
-                        copyButton.textContent = "Copy results";
-                    }, 1800);
-
-                } catch (error) {
-                    setStatus(
-                        "Could not copy automatically. You can select the results and copy them manually.",
-                        true
-                    );
-                }
-            });
-
-            actions.appendChild(copyButton);
-            resultRegion.appendChild(actions);
-
-            resultRegion.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
-        }
-
-        async function runScan(event) {
-            if (event) event.preventDefault();
-
-            if (busy) return;
-
+        function validateDependencies() {
             if (
                 !Security ||
+                typeof Security.validateMessage !== "function" ||
+                typeof Security.validateImage !== "function"
+            ) {
+                throw new Error(
+                    "The security module could not be loaded."
+                );
+            }
+
+            if (
                 !analyzer ||
                 typeof analyzer.analyzeMessage !== "function"
             ) {
-                setStatus(
-                    "The scanner could not start. Check that security.js and ai-integration.js load before scanner.js.",
-                    true
+                throw new Error(
+                    "The scam analysis engine could not be loaded."
                 );
-                return;
+            }
+        }
+
+        function validateAnalysisResult(result) {
+            if (
+                !result ||
+                typeof result !== "object" ||
+                !Number.isFinite(result.score) ||
+                !["low", "medium", "high"].includes(result.riskLevel)
+            ) {
+                throw new Error(
+                    "The analysis engine returned an invalid result."
+                );
             }
 
-            var typedText = messageInput.value;
-            var imageText = "";
+            return {
+                score: Math.max(
+                    0,
+                    Math.min(100, Math.round(result.score))
+                ),
 
-            var selectedFile =
-                imageInput && imageInput.files
-                    ? imageInput.files[0]
-                    : null;
+                riskLevel: result.riskLevel,
 
-            if (typedText.length > MAX_MESSAGE_LENGTH) {
-                showError(
-                    "Messages must be 20,000 characters or fewer."
+                verdict:
+                    typeof result.verdict === "string"
+                        ? result.verdict
+                        : "Analysis complete",
+
+                findings: Array.isArray(result.findings)
+                    ? result.findings.map(function (finding) {
+                        return {
+                            title:
+                                typeof finding.title === "string"
+                                    ? finding.title
+                                    : "Potential warning sign",
+
+                            detail:
+                                typeof finding.detail === "string"
+                                    ? finding.detail
+                                    : ""
+                        };
+                    })
+                    : [],
+
+                recommendations: Array.isArray(result.recommendations)
+                    ? result.recommendations.filter(function (item) {
+                        return typeof item === "string";
+                    })
+                    : [],
+
+                disclaimer:
+                    typeof result.disclaimer === "string"
+                        ? result.disclaimer
+                        : "Automated results are estimates and cannot guarantee whether a message is safe or fraudulent.",
+
+                engine:
+                    typeof result.engine === "string"
+                        ? result.engine
+                        : "browser-heuristic-demo",
+
+                createdAt: new Date().toISOString()
+            };
+        }
+
+        function saveResults(result) {
+            try {
+                sessionStorage.setItem(
+                    STORAGE_KEY,
+                    JSON.stringify(result)
                 );
-                return;
-            }
 
-            if (!typedText.trim() && !selectedFile) {
-                showError(
-                    "Paste a suspicious message or choose a screenshot to scan."
+                return true;
+
+            } catch (error) {
+                console.error(
+                    "Scan-A-Scam could not save results:",
+                    error
                 );
 
-                messageInput.focus();
-                return;
+                return false;
             }
+        }
 
-            setBusy(true, "Scanning…");
+        function getResultsPage() {
+            // Preserve the original link's destination when available.
+            const destination =
+                scanButton.getAttribute("href") || "results.html";
 
-            setStatus(
-                "Checking the message for common warning signs…"
+            const resultURL = new URL(
+                destination,
+                document.baseURI
             );
 
-            resultRegion.hidden = true;
+            // Results should remain on the same website.
+            if (resultURL.origin !== window.location.origin) {
+                throw new Error(
+                    "The results page must be on the same website."
+                );
+            }
+
+            return resultURL.href;
+        }
+
+        async function analyzeMessage() {
+            if (isScanning) {
+                return;
+            }
+
+            setBusy(true);
+            setStatus("Preparing your message for analysis...");
 
             try {
-                if (selectedFile) {
-                    var validation = Security.validateImage(selectedFile);
+                validateDependencies();
 
-                    if (!validation.valid) {
-                        throw new Error(validation.message);
+                const typedText = messageInput.value;
+
+                if (typedText.length > MAX_MESSAGE_LENGTH) {
+                    throw new Error(
+                        "Messages must contain 20,000 characters or fewer."
+                    );
+                }
+
+                const selectedFile =
+                    imageInput && imageInput.files
+                        ? imageInput.files[0]
+                        : null;
+
+                let extractedText = "";
+
+                // Handle screenshot uploads.
+                if (selectedFile) {
+                    const imageValidation =
+                        Security.validateImage(selectedFile);
+
+                    if (!imageValidation.valid) {
+                        throw new Error(imageValidation.message);
                     }
 
                     if (
-                        !window.ScanAScamImageReader ||
-                        typeof window.ScanAScamImageReader.readText !== "function"
+                        !imageReader ||
+                        typeof imageReader.readText !== "function"
                     ) {
                         throw new Error(
-                            "Screenshot reading is not available. You can still paste the message text instead."
+                            "Screenshot text extraction is unavailable."
                         );
                     }
 
                     setStatus(
-                        "Reading text from your screenshot. The image is processed in your browser…"
+                        "Reading text from your screenshot..."
                     );
 
-                    imageText =
-                        await window.ScanAScamImageReader.readText(
-                            selectedFile,
-                            {
-                                onProgress: function (percent) {
-                                    setStatus(
-                                        "Reading screenshot text… " +
-                                        percent +
-                                        "%"
-                                    );
-                                }
+                    extractedText = await imageReader.readText(
+                        selectedFile,
+                        {
+                            onProgress: function (percent) {
+                                setStatus(
+                                    "Reading screenshot... " +
+                                    percent +
+                                    "%"
+                                );
                             }
-                        );
+                        }
+                    );
                 }
 
-                var combinedText = [
+                // Combine typed text and screenshot text.
+                const combinedText = [
                     typedText.trim(),
-                    imageText
-                ].filter(Boolean).join("\n\n");
+                    extractedText
+                ]
+                    .filter(Boolean)
+                    .join("\n\n");
 
-                var messageValidation =
+                // Validate the complete message.
+                const validation =
                     Security.validateMessage(combinedText);
 
-                if (!messageValidation.valid) {
-                    throw new Error(messageValidation.message);
+                if (!validation.valid) {
+                    throw new Error(validation.message);
                 }
 
-                var result =
-                    analyzer.analyzeMessage(messageValidation.value);
-
-                renderResult(result);
-
                 setStatus(
-                    "Scan complete. Review the warning signs and verify the message independently."
+                    "Analyzing the message for suspicious patterns..."
                 );
+
+                // Run the original scam detection engine.
+                const rawResult = analyzer.analyzeMessage(
+                    validation.value
+                );
+
+                // Verify and prepare the returned analysis.
+                const result = validateAnalysisResult(rawResult);
+
+                // Save results before navigating.
+                if (!saveResults(result)) {
+                    throw new Error(
+                        "Your results could not be saved. Please check your browser storage settings."
+                    );
+                }
+
+                setStatus("Analysis complete. Opening your results...");
+
+                // Navigate to the original results page.
+                window.location.assign(getResultsPage());
 
             } catch (error) {
-                showError(
-                    error && error.message
-                        ? error.message
-                        : "Something went wrong while scanning. Please try again."
+                console.error(
+                    "Scan-A-Scam analysis error:",
+                    error
                 );
 
                 setStatus(
-                    "The scan could not be completed.",
+                    error && error.message
+                        ? error.message
+                        : "Something went wrong. Please try again.",
                     true
                 );
 
-            } finally {
                 setBusy(false);
             }
         }
 
-        messageInput.maxLength = MAX_MESSAGE_LENGTH + 1;
+        // Intercept the original Scan Content link.
+        // It will analyze the message before navigating.
+        const form = messageInput.closest("form");
 
-        messageInput.addEventListener("input", updateCounter);
-
-        updateCounter();
-
-        if (imageInput) {
-            imageInput.accept = "image/png,image/jpeg,image/webp";
-
-            imageInput.addEventListener("change", function () {
-                var file =
-                    imageInput.files && imageInput.files[0];
-
-                if (!file) {
-                    fileStatus.textContent = "";
-                    return;
-                }
-
-                var validation = Security.validateImage(file);
-
-                fileStatus.textContent = validation.valid
-                    ? "Selected: " + file.name +
-                      " (" +
-                      (file.size / 1024 / 1024).toFixed(2) +
-                      " MB)"
-                    : validation.message;
-
-                fileStatus.classList.toggle(
-                    "is-error",
-                    !validation.valid
-                );
+        if (form) {
+            form.addEventListener("submit", function (event) {
+                event.preventDefault();
+                analyzeMessage();
+            });
+        } else {
+            scanButton.addEventListener("click", function (event) {
+                event.preventDefault();
+                analyzeMessage();
             });
         }
 
-        if (
-            form &&
-            scanButton.form === form &&
-            scanButton.type === "submit"
-        ) {
-            form.addEventListener("submit", runScan);
-        } else {
-            scanButton.addEventListener("click", runScan);
-        }
+        // Support an optional clear button.
+        const clearButton = document.querySelector(
+            "#clearButton, .clear-button"
+        );
 
         if (clearButton) {
             clearButton.addEventListener("click", function () {
@@ -552,16 +367,14 @@
                     imageInput.value = "";
                 }
 
-                fileStatus.textContent = "";
-
-                resultRegion.replaceChildren();
-                resultRegion.hidden = true;
-
                 setStatus("");
-                updateCounter();
-
                 messageInput.focus();
             });
+        }
+
+        // Restrict screenshot uploads to supported image formats.
+        if (imageInput) {
+            imageInput.accept = "image/png,image/jpeg,image/webp";
         }
     }
 
@@ -574,4 +387,5 @@
     } else {
         initializeScanner();
     }
+
 })();
