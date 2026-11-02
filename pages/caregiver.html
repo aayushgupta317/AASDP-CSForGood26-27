@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scan-A-Scam | Caregiver Settings</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/caregiver.css">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="brand-logo" onclick="window.location.href='index.html'">
+                <i class="fa-solid fa-shield-cat"></i>
+                <h2>Scan-A-Scam</h2>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-btn"><i class="fa-solid fa-house"></i> Home</a>
+                <a href="upload.html" class="nav-btn"><i class="fa-solid fa-magnifying-glass"></i> Scanner</a>
+                <a href="community.html" class="nav-btn"><i class="fa-solid fa-bullhorn"></i> Fishers Alerts <span class="badge">5</span></a>
+                <a href="caregiver.html" class="nav-btn active"><i class="fa-solid fa-gear"></i> Caregiver Settings</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="page-container">
+        <h2 class="page-title">Caregiver Safety Net Settings</h2>
+        <p class="page-subtitle">Configure a trusted family member or caregiver to receive instant alerts when high-risk scams are detected.</p>
+
+        <div class="card caregiver-card-max">
+            <form onsubmit="saveCaregiverSettings(event)">
+                <div class="form-group">
+                    <label for="cg-name" class="form-label-bold">Caregiver Name:</label>
+                    <input type="text" id="cg-name" value="Sarah" required placeholder="e.g., Sarah (Daughter)">
+                </div>
+
+                <div class="form-group">
+                    <label for="cg-phone" class="form-label-bold">Phone Number (for SMS Alerts):</label>
+                    <input type="tel" id="cg-phone" value="(317) 555-0182" required placeholder="(317) 555-XXXX">
+                </div>
+
+                <div class="form-group">
+                    <label for="cg-email" class="form-label-bold">Email Address:</label>
+                    <input type="email" id="cg-email" value="sarah.caregiver@example.com" required placeholder="name@example.com">
+                </div>
+
+                <div class="form-group-last">
+                    <label for="cg-rel" class="form-label-bold">Relationship:</label>
+                    <input type="text" id="cg-rel" value="Daughter" placeholder="e.g., Son, Daughter, Caregiver">
+                </div>
+
+                <button type="submit" class="btn btn-success"><i class="fa-solid fa-floppy-disk"></i> Save Contact Settings</button>
+                <span id="cg-save-status" class="save-status-badge" style="display: none;">Saved!</span>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>Scan-A-Scam • Fishers, Indiana Community Protection • NexTech CS for Good</p>
+    </footer>
+
+    <script src="../js/app.js"></script>
+</body>
+</html>
