@@ -1,0 +1,88 @@
+/* ==========================================================================
+   Scan-A-Scam Caregiver Safety Net Styling
+   ========================================================================== */
+
+.caregiver-emergency-card {
+    background: #fff5f5;
+    border: 2px solid var(--danger-border);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.1);
+}
+
+.caregiver-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.caregiver-alert-heading {
+    color: var(--danger-text);
+    font-size: 1.25rem;
+}
+
+.caregiver-sub-text {
+    font-size: 0.9rem;
+    color: #7f1d1d;
+    margin-top: 0.25rem;
+}
+
+.share-preview-box {
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    font-size: 0.9rem;
+    color: #334155;
+    margin: 1rem 0;
+    font-style: italic;
+}
+
+.button-group {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.caregiver-card-max {
+    max-width: 650px;
+}
+
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-group-last {
+    margin-bottom: 1.5rem;
+}
+
+.form-label-bold {
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: block;
+    margin-bottom: 0.35rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.85rem;
+    border: 1.5px solid var(--border-color);
+    border-radius: var(--radius-md);
+    font-family: inherit;
+    font-size: 0.95rem;
+    outline: none;
+}
+
+.form-group input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.15);
+}
+
+.save-status-badge {
+    margin-left: 1rem;
+    font-weight: 600;
+    color: #16a34a;
+}
