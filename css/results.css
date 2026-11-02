@@ -1,157 +1,91 @@
-@import url("style.css");
+/* ==========================================================================
+   Scan-A-Scam Results Page Styling
+   ========================================================================== */
 
-body.results-page {
-    background: var(--color-surface);
-    min-width: 0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
-.results-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-3);
-    padding: var(--space-5) var(--space-4);
-    border-bottom: 1px solid var(--color-border);
-    background: var(--color-surface);
-    color: var(--color-text);
-    text-align: center;
-}
-
-.results-header img {
-    width: 120px;
-    max-width: 30%;
-    height: auto;
-}
-
-.results-header h1 {
-    font-size: clamp(1.5rem, 4vw, 2rem);
-}
-
-.results-container {
-    width: min(100% - 2rem, 800px);
-    margin: var(--space-7) auto;
-    flex: 1;
-    padding: var(--space-5);
+.risk-gauge {
     border-radius: var(--radius-lg);
-    background: var(--color-surface);
-}
-
-.results-card {
-    margin-bottom: var(--space-5);
-    padding: clamp(1.5rem, 4vw, 2.5rem);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    background: var(--color-surface);
-    box-shadow: var(--shadow-sm);
-}
-
-.results-card.results-title {
+    padding: 2rem;
     text-align: center;
+    margin-bottom: 2rem;
 }
 
-.results-card h2 {
-    color: var(--color-text);
-    font-size: 1.5rem;
-    line-height: 1.3;
+.risk-gauge.high {
+    background: var(--danger-bg);
+    border: 1.5.px solid var(--danger-border);
+    color: var(--danger-text);
 }
 
-.results-card p {
-    margin-top: var(--space-2);
-    color: var(--color-text-muted);
+.risk-gauge.medium {
+    background: var(--warning-bg);
+    border: 1.5px solid var(--warning-border);
+    color: var(--warning-text);
 }
 
-.results-card ul {
-    margin-top: var(--space-4);
-    padding-left: 1.25rem;
+.risk-gauge.low {
+    background: var(--success-bg);
+    border: 1.5px solid var(--success-border);
+    color: var(--success-text);
 }
 
-.results-card li {
-    padding-left: var(--space-2);
-    color: var(--color-text-muted);
-}
-
-.results-card li + li {
-    margin-top: var(--space-3);
-}
-
-.results-risk-badge {
-    width: min(100%, 380px);
-    margin: var(--space-5) auto;
-    padding: var(--space-5);
-    border: 1px solid #e8c78b;
-    border-radius: var(--radius-md);
-    background: var(--color-amber-soft);
-}
-
-.results-risk-score {
-    color: var(--color-amber);
-    font-size: clamp(2.75rem, 8vw, 3.75rem);
+.score-display {
+    font-size: 3.5rem;
     font-weight: 800;
     line-height: 1;
+    margin-bottom: 0.5rem;
 }
 
-.results-risk-label {
-    color: var(--color-amber);
-    font-size: 1.25rem;
+.score-title {
+    font-size: 1.35rem;
     font-weight: 700;
 }
 
-.results-sample-note {
-    max-width: 34rem;
-    margin-right: auto;
-    margin-left: auto;
-    font-size: 0.95rem;
+.bullet-list {
+    padding-left: 1.25rem;
+    margin-top: 0.75rem;
 }
 
-.results-warning {
-    margin-top: var(--space-5);
-    padding: var(--space-4);
-    border-left: 4px solid var(--color-amber);
-    border-radius: var(--radius-sm);
-    background: var(--color-amber-soft);
-    color: #674300;
+.bullet-list li {
+    margin-bottom: 0.5rem;
+    color: var(--text-main);
 }
 
-.results-button-container {
-    margin: var(--space-6) 0;
-    text-align: center;
+.result-card-spacing {
+    margin-bottom: 1.5rem;
 }
 
-.results-button {
-    display: inline-flex;
+.text-amber { color: #f59e0b; }
+.text-green { color: #059669; }
+.text-primary { color: var(--primary); }
+
+.community-share-box {
+    background: var(--accent-bg);
+    border-color: #bfdbfe;
+}
+
+.share-box-content {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    min-height: 3rem;
-    padding: var(--space-3) var(--space-5);
-    border-radius: var(--radius-sm);
-    background: var(--color-primary);
-    color: #fff;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.share-box-sub {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+}
+
+.status-msg-blue {
+    margin-top: 0.75rem;
+    font-size: 0.875rem;
     font-weight: 700;
-    box-shadow: var(--shadow-sm);
-    transition: background-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+    color: var(--primary);
 }
 
-.results-button:hover {
-    background: var(--color-primary-dark);
-    box-shadow: var(--shadow-md);
-    color: #fff;
-    transform: translateY(-1px);
-}
-
-.results-footer {
-    padding: var(--space-5) var(--space-4);
-    border-top: 1px solid var(--color-border);
-    background: var(--color-surface-muted);
-    color: var(--color-text-muted);
-    text-align: center;
-}
-
-@media (max-width: 600px) {
-    .results-container {
-        width: min(100% - 1.5rem, 800px);
-        margin-top: var(--space-5);
-    }
+.status-msg-green {
+    margin-top: 0.75rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #15803d;
 }
