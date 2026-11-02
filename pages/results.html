@@ -1,103 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scan-A-Scam | Analysis Results</title>
 
-    <title>Scan-A-Scam | Results</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/results.css">
+    <link rel="stylesheet" href="../css/caregiver.css">
 </head>
+<body>
 
-<body class="results-page">
-
-    <header class="results-header">
-        <img src="logo.png" alt="" width="120">
-        <h1>Scan-A-Scam</h1>
+    <header>
+        <nav>
+            <div class="brand-logo" onclick="window.location.href='index.html'">
+                <i class="fa-solid fa-shield-cat"></i>
+                <h2>Scan-A-Scam</h2>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-btn"><i class="fa-solid fa-house"></i> Home</a>
+                <a href="upload.html" class="nav-btn"><i class="fa-solid fa-magnifying-glass"></i> Scanner</a>
+                <a href="community.html" class="nav-btn"><i class="fa-solid fa-bullhorn"></i> Fishers Alerts <span class="badge" id="badge-count">5</span></a>
+                <a href="caregiver.html" class="nav-btn"><i class="fa-solid fa-gear"></i> Caregiver Settings</a>
+            </div>
+        </nav>
     </header>
 
-    <main class="results-container">
+    <main class="page-container">
+        <h2 class="page-title">Analysis Results</h2>
+        <p class="page-subtitle">Here is the threat assessment breakdown for your message.</p>
 
-        <!-- Scam result -->
-        <section class="results-card results-title">
-            <h2>Analysis Complete</h2>
-            <p>Here's what we found.</p>
-
-            <div
-                class="results-risk-badge"
-                role="status"
-                aria-live="polite"
-            >
-                <p
-                    class="results-risk-score"
-                    id="risk-score"
-                >
-                    85%
-                </p>
-
-                <p
-                    class="results-risk-label"
-                    id="risk-level"
-                >
-                    Likely Scam
-                </p>
-            </div>
-
-            <p class="results-sample-note">
-                This is currently a sample result.
-                The final score will come from the scam analysis system.
-            </p>
-        </section>
-
-        <!-- Reasons -->
-        <section class="results-card">
-            <h2>Why does this look suspicious?</h2>
-
-            <ul id="risk-reasons">
-                <li>The message asks you to act quickly.</li>
-                <li>The sender may be unfamiliar.</li>
-                <li>The message may be asking for personal information.</li>
-            </ul>
-        </section>
-
-        <!-- Recommended actions -->
-        <section class="results-card">
-            <h2>What should you do?</h2>
-
-            <ul id="recommendations">
-                <li>Do not click suspicious links.</li>
-                <li>Do not give out passwords or personal information.</li>
-                <li>
-                    Contact the company or person through a method
-                    you already trust.
-                </li>
-                <li>Ask someone you trust if you are unsure.</li>
-            </ul>
-
-            <div class="results-warning">
-                <strong>Remember:</strong>
-                It is okay to stop and check before responding.
-            </div>
-        </section>
-
-        <!-- Return to upload page -->
-        <div class="results-button-container">
-            <a class="results-button" href="upload.html">
-                Check Another Message
-            </a>
+        <!-- Risk Gauge Header -->
+        <div id="risk-banner" class="risk-gauge high">
+            <div class="score-display" id="res-score-display">85%</div>
+            <div class="score-title" id="res-title-display">Likely Scam Detected</div>
         </div>
 
+        <!-- Caregiver Emergency Alert Trigger Box (Score >= 80%) -->
+        <div id="caregiver-alert-card" class="caregiver-emergency-card" style="display: none;">
+            <div class="caregiver-card-header">
+                <div>
+                    <h3 class="caregiver-alert-heading"><i class="fa-solid fa-triangle-exclamation"></i> High Risk Detected — Alert Your Caregiver</h3>
+                    <p class="caregiver-sub-text" id="caregiver-contact-display">Trusted Contact: Sarah (Daughter) • (317) 555-0182</p>
+                </div>
+                <a href="caregiver.html" class="btn btn-outline" style="background: white;"><i class="fa-solid fa-gear"></i> Edit Contact</a>
+            </div>
+
+            <div class="share-preview-box">
+                <strong>Pre-Formatted Safety Net Alert:</strong>
+                "<span id="caregiver-msg-preview">Hi Sarah, Scan-A-Scam flagged a 85% high-risk scam message asking for immediate money. Can you check this before I respond?</span>"
+            </div>
+
+            <div class="button-group">
+                <button class="btn btn-danger" onclick="sendCaregiverSMS()"><i class="fa-solid fa-comment-sms"></i> Send SMS Alert to Caregiver</button>
+                <button class="btn btn-outline" style="background: white;" onclick="sendCaregiverEmail()"><i class="fa-solid fa-envelope"></i> Send Email Alert</button>
+            </div>
+            <p id="caregiver-sent-status" class="status-msg-green" style="display: none;"></p>
+        </div>
+
+        <!-- Suspicious Reasons -->
+        <div class="card result-card-spacing">
+            <h3><i class="fa-solid fa-circle-exclamation text-amber"></i> Why does this look suspicious?</h3>
+            <ul class="bullet-list" id="res-flags-container"></ul>
+        </div>
+
+        <!-- Actionable Steps -->
+        <div class="card result-card-spacing">
+            <h3><i class="fa-solid fa-shield-check text-green"></i> Recommended Next Steps</h3>
+            <ul class="bullet-list" id="res-steps-container"></ul>
+        </div>
+
+        <!-- Share with Fishers -->
+        <div class="card community-share-box">
+            <div class="share-box-content">
+                <div>
+                    <h3 class="text-primary"><i class="fa-solid fa-bullhorn"></i> Share with Fishers Community</h3>
+                    <p class="share-box-sub">Help protect fellow residents in Fishers by posting an anonymous alert to the local board.</p>
+                </div>
+                <!-- UPDATED: Opens modal window for location & details entry -->
+                <button class="btn btn-primary" onclick="openCustomPostModal()"><i class="fa-solid fa-share-nodes"></i> Post Anonymous Alert</button>
+            </div>
+            <p id="post-status-msg" class="status-msg-blue" style="display: none;"></p>
+        </div>
+
+        <div style="margin-top: 1.5rem; text-align: center;">
+            <a href="upload.html" class="btn btn-outline"><i class="fa-solid fa-arrow-left"></i> Check Another Message</a>
+        </div>
     </main>
 
-    <footer class="results-footer">
-        <p>Scan-A-Scam • NexTech CS for Good</p>
+    <footer>
+        <p>Scan-A-Scam • Fishers, Indiana Community Protection • NexTech CS for Good</p>
     </footer>
 
+    <script src="../js/app.js"></script>
 </body>
-
 </html>
