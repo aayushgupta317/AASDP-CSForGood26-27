@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scan-A-Scam | Fishers Alerts</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/community.css">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="brand-logo" onclick="window.location.href='index.html'">
+                <i class="fa-solid fa-shield-cat"></i>
+                <h2>Scan-A-Scam</h2>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-btn"><i class="fa-solid fa-house"></i> Home</a>
+                <a href="upload.html" class="nav-btn"><i class="fa-solid fa-magnifying-glass"></i> Scanner</a>
+                <a href="results.html" class="nav-btn"><i class="fa-solid fa-chart-bar"></i> Results</a>
+                <a href="community.html" class="nav-btn active"><i class="fa-solid fa-bullhorn"></i> Fishers Alerts <span class="badge" id="badge-count">5</span></a>
+                <a href="caregiver.html" class="nav-btn"><i class="fa-solid fa-gear"></i> Caregiver Settings</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="page-container">
+        <div class="community-header-row">
+            <div>
+                <h2 class="page-title">Fishers Community Alert Board</h2>
+                <p class="page-subtitle">Recent anonymized scam reports shared by local residents in Fishers, IN.</p>
+            </div>
+            <!-- Added Clear Feeds Button alongside Post Alert -->
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                <button class="btn btn-outline" onclick="clearCommunityFeed()"><i class="fa-solid fa-trash-can"></i> Clear Feeds</button>
+                <button class="btn btn-primary" onclick="openPostModal()"><i class="fa-solid fa-plus"></i> Post Alert</button>
+            </div>
+        </div>
+
+        <!-- Neighborhood Filter Chips -->
+        <div class="filter-bar">
+            <button class="filter-chip active" onclick="applyFilter('All', this)">All Fishers</button>
+            <button class="filter-chip" onclick="applyFilter('Sunblest', this)">Sunblest</button>
+            <button class="filter-chip" onclick="applyFilter('Nickel Plate', this)">Nickel Plate District</button>
+            <button class="filter-chip" onclick="applyFilter('Geist', this)">Geist</button>
+            <button class="filter-chip" onclick="applyFilter('Heritage Park', this)">Heritage Park</button>
+            <button class="filter-chip" onclick="applyFilter('Fall Creek', this)">Fall Creek</button>
+        </div>
+
+        <!-- Dynamic Feed List -->
+        <div id="alerts-feed-container"></div>
+    </main>
+
+    <footer>
+        <p>Scan-A-Scam • Fishers, Indiana Community Protection • NexTech CS for Good</p>
+    </footer>
+
+    <script src="../js/app.js"></script>
+</body>
+</html>
