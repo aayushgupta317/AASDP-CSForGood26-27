@@ -3,7 +3,7 @@
 (function (global) {
     "use strict";
 
-    const MODEL = "gemini-3.6-flash";
+    const MODEL = "gemini-3.5-flash-lite";
     const ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models/" + MODEL + ":generateContent";
     const PLACEHOLDER = "PASTE_YOUR_GEMINI_API_KEY_HERE";
     const TIMEOUT_MS = 45000;
@@ -108,7 +108,7 @@
                 body: JSON.stringify({
                     systemInstruction: { parts: [{ text: INSTRUCTIONS }] },
                     contents: [{ role: "user", parts: parts }],
-                    generationConfig: { responseMimeType: "application/json", responseSchema: SCHEMA }
+                    generationConfig: { temperature: 0.2, responseMimeType: "application/json", responseSchema: SCHEMA }
                 })
             });
         } catch (error) {
