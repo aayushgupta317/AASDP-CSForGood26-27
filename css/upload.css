@@ -1,128 +1,100 @@
-/* ==========================================================================
-   Scan-A-Scam Scanner Styling
-   ========================================================================== */
-
-.scanner-card {
-    background: var(--surface);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-lg);
-    padding: 2rem;
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+/* css/upload.css */
+.upload-container {
+    max-width: 650px;
+    margin: 40px auto;
+    padding: 0 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.form-label {
-    font-weight: 700;
+.upload-container h1 {
+    color: #1e293b;
+    margin-bottom: 8px;
+}
+
+.upload-container > p {
+    color: #64748b;
+    margin-bottom: 24px;
+}
+
+.upload-card {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    border: 1px solid #e2e8f0;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 8px;
     font-size: 0.95rem;
-    display: block;
 }
 
-.text-input {
+.form-group textarea {
     width: 100%;
-    height: 140px;
-    padding: 0.85rem;
-    border: 1.5px solid var(--border-color);
-    border-radius: var(--radius-md);
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 1rem;
     font-family: inherit;
-    font-size: 0.95rem;
-    outline: none;
-    margin-top: 0.35rem;
-    margin-bottom: 1rem;
     resize: vertical;
-    transition: border-color 0.15s;
+    box-sizing: border-box;
 }
 
-.text-input:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.15);
+.form-group textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
-.sample-presets-box {
+.file-upload-box input[type="file"] {
+    padding: 10px;
     background: #f8fafc;
-    padding: 1rem;
-    border-radius: var(--radius-md);
-    border: 1px dashed var(--border-color);
+    border: 1px dashed #cbd5e1;
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-.preset-header {
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
-.sample-buttons {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-    margin-top: 0.5rem;
-}
-
-.sample-btn {
-    background: white;
-    color: var(--text-main);
-    border: 1px solid var(--border-color);
-    padding: 0.5rem 0.85rem;
-    border-radius: 6px;
-    font-size: 0.85rem;
+.btn-primary {
+    background-color: #2563eb;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.15s;
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
+    width: 100%;
+    transition: background-color 0.2s;
 }
 
-.sample-btn:hover {
-    border-color: var(--primary);
-    color: var(--primary);
-    background: var(--accent-bg);
+.btn-primary:hover {
+    background-color: #1d4ed8;
 }
 
-.icon-amber { color: #f59e0b; }
-.icon-red { color: #ef4444; }
-.icon-purple { color: #a855f7; }
-.icon-blue { color: #3b82f6; }
-
-.upload-section {
-    margin-top: 1.5rem;
+.hidden {
+    display: none !important;
 }
 
-.dropzone {
-    border: 2px dashed var(--border-color);
-    border-radius: var(--radius-md);
-    padding: 1.5rem;
-    text-align: center;
-    background: #f8fafc;
-    margin-top: 0.5rem;
-    cursor: pointer;
-    transition: background 0.15s;
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #2563eb;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
 }
 
-.dropzone:hover {
-    background: #f1f5f9;
-}
-
-.dropzone-icon {
-    font-size: 1.75rem;
-    color: var(--text-muted);
-    margin-bottom: 0.5rem;
-}
-
-.dropzone-text {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--text-main);
-}
-
-.dropzone-subtext {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-}
-
-.scanner-actions {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 2rem;
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
