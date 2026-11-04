@@ -3,131 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scan-A-Scam - Scan Results</title>
+    <title>Scan-A-Scam | Results</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/results.css">
 </head>
 <body>
-    <header class="navbar">
-        <div class="logo">🛡️ Scan-A-Scam</div>
+    <header>
         <nav>
-            <a href="index.html">Home</a>
-            <a href="upload.html">Scan Another</a>
-            <a href="community.html">Community</a>
-            <a href="caregiver.html">Caregivers</a>
+            <div class="brand-logo" onclick="window.location.href='index.html'">
+                <i class="fa-solid fa-shield-cat"></i>
+                <h2>Scan-A-Scam</h2>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-btn"><i class="fa-solid fa-house"></i> Home</a>
+                <a href="upload.html" class="nav-btn"><i class="fa-solid fa-magnifying-glass"></i> Scanner</a>
+                <a href="community.html" class="nav-btn"><i class="fa-solid fa-bullhorn"></i> Fishers Alerts <span class="badge" id="badge-count">5</span></a>
+                <a href="caregiver.html" class="nav-btn"><i class="fa-solid fa-gear"></i> Caregiver Settings</a>
+            </div>
         </nav>
     </header>
 
-    <main class="results-container">
-        <h1>Analysis Results</h1>
-        
-        <div id="result-card" class="result-card">
-            <div id="risk-badge" class="risk-badge">
-                <span id="risk-icon">⏳</span>
-                <span id="risk-title">Loading Assessment...</span>
+    <main class="page-container">
+        <h1 class="page-title">Your scan results</h1>
+
+        <section id="empty-state" class="card hidden">
+            <h3>No scan to show yet</h3>
+            <p>Check a message first and the results will appear here.</p>
+            <p style="margin-top: 1rem;"><a href="upload.html" class="btn btn-primary">Check a message</a></p>
+        </section>
+
+        <div id="results" class="hidden">
+            <div id="risk-banner" class="risk-gauge" role="status">
+                <div id="res-title-display" class="score-title"><i id="res-icon" aria-hidden="true"></i><span></span></div>
+                <p id="res-category" class="score-category"></p>
+                <div id="meter" class="meter" role="meter" aria-label="Risk score" aria-valuemin="0" aria-valuemax="100"><div id="meter-fill" class="meter-fill"></div></div>
+                <div id="res-score-display" class="score-display"></div>
             </div>
 
-            <div class="score-section">
-                <h3>Threat Score: <span id="threat-score">--</span>/100</h3>
-                <div class="progress-bar-container">
-                    <div id="progress-fill" class="progress-fill"></div>
+            <div class="card result-card-spacing">
+                <h3>What we found</h3>
+                <p id="res-summary" style="color: var(--text-main);"></p>
+            </div>
+
+            <div class="card result-card-spacing">
+                <h3>Warning signs</h3>
+                <ul id="res-flags-container" class="bullet-list"></ul>
+            </div>
+
+            <div class="card result-card-spacing">
+                <h3>What you should do</h3>
+                <ul id="res-steps-container" class="bullet-list"></ul>
+            </div>
+
+            <div id="caregiver-alert-card" class="card caregiver-emergency-card result-card-spacing hidden">
+                <h3>Ask someone you trust</h3>
+                <p id="caregiver-contact-display"></p>
+                <div id="caregiver-msg-preview" class="share-preview-box"></div>
+                <div class="button-group">
+                    <button class="btn btn-primary" onclick="sendCaregiverSMS()"><i class="fa-solid fa-comment-sms"></i> Text them</button>
+                    <button class="btn btn-outline" onclick="sendCaregiverEmail()"><i class="fa-solid fa-envelope"></i> Email them</button>
                 </div>
+                <div id="caregiver-sent-status" class="status-msg-green" style="display: none;"></div>
             </div>
 
-            <div class="section-block">
-                <h3>Summary</h3>
-                <p id="result-summary">Retrieving evaluation from AI security engine...</p>
-            </div>
-
-            <div class="section-block" id="red-flags-container">
-                <h3>Detected Red Flags</h3>
-                <ul id="red-flags-list">
-                    <li>Analyzing indicators...</li>
-                </ul>
-            </div>
-
-            <div class="section-block">
-                <h3>Recommended Actions</h3>
-                <ul id="recommendations-list">
-                    <li>Please wait...</li>
-                </ul>
+            <div class="card result-card-spacing">
+                <div class="share-box-content">
+                    <div>
+                        <h3>Warn your neighbors</h3>
+                        <p class="share-box-sub">Share this scam anonymously on the Fishers alert board.</p>
+                    </div>
+                    <button class="btn btn-outline" onclick="openCustomPostModal()"><i class="fa-solid fa-bullhorn"></i> Share alert</button>
+                </div>
+                <div id="post-status-msg" class="status-msg-blue" style="display: none;"></div>
             </div>
 
             <div class="action-buttons">
-                <a href="upload.html" class="btn-secondary">Scan Another Item</a>
-                <a href="caregiver.html" class="btn-primary" id="notify-caregiver-btn">Alert Caregiver / Community</a>
+                <a href="upload.html" class="btn btn-primary"><i class="fa-solid fa-rotate-right"></i> Check another message</a>
             </div>
         </div>
     </main>
 
-    <script>
-        window.addEventListener('DOMContentLoaded', () => {
-            const storedData = sessionStorage.getItem('scanResult');
-            const resultCard = document.getElementById('result-card');
-            const riskBadge = document.getElementById('risk-badge');
-            const riskIcon = document.getElementById('risk-icon');
-            const riskTitle = document.getElementById('risk-title');
-            const threatScore = document.getElementById('threat-score');
-            const progressFill = document.getElementById('progress-fill');
-            const resultSummary = document.getElementById('result-summary');
-            const redFlagsList = document.getElementById('red-flags-list');
-            const recommendationsList = document.getElementById('recommendations-list');
+    <footer>
+        <p>Scan-A-Scam • Fishers, Indiana Community Protection • NexTech CS for Good</p>
+    </footer>
 
-            if (!storedData) {
-                resultSummary.textContent = "No scan data found. Please submit a message or image to scan.";
-                return;
-            }
-
-            const data = JSON.parse(storedData);
-            const level = data.riskLevel ? data.riskLevel.toLowerCase() : 'yellow';
-
-            // Apply styling classes based on risk level (green, yellow, red)
-            resultCard.classList.remove('risk-green', 'risk-yellow', 'risk-red');
-            resultCard.classList.add(`risk-${level}`);
-
-            if (level === 'green') {
-                riskIcon.textContent = '✅';
-                riskTitle.textContent = 'Low Risk / Appears Safe';
-            } else if (level === 'yellow') {
-                riskIcon.textContent = '⚠️';
-                riskTitle.textContent = 'Suspicious / Exercise Caution';
-            } else {
-                riskIcon.textContent = '🚨';
-                riskTitle.textContent = 'High Risk Scam Detected!';
-            }
-
-            threatScore.textContent = data.score || 0;
-            progressFill.style.width = `${data.score || 0}%`;
-            resultSummary.textContent = data.summary || "No summary provided.";
-
-            // Populate Red Flags
-            redFlagsList.innerHTML = '';
-            if (data.redFlags && data.redFlags.length > 0) {
-                data.redFlags.forEach(flag => {
-                    const li = document.createElement('li');
-                    li.textContent = flag;
-                    redFlagsList.appendChild(li);
-                });
-            } else {
-                const li = document.createElement('li');
-                li.textContent = 'No major red flags identified.';
-                redFlagsList.appendChild(li);
-            }
-
-            // Populate Recommendations
-            recommendationsList.innerHTML = '';
-            if (data.recommendations && data.recommendations.length > 0) {
-                data.recommendations.forEach(rec => {
-                    const li = document.createElement('li');
-                    li.textContent = rec;
-                    recommendationsList.appendChild(li);
-                });
-            } else {
-                const li = document.createElement('li');
-                li.textContent = 'Stay vigilant and verify through official channels.';
-                recommendationsList.appendChild(li);
-            }
-        });
-    </script>
+    <script src="../js/app.js"></script>
+    <script src="../js/results.js"></script>
 </body>
 </html>
