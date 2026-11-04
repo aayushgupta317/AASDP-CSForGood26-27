@@ -3,100 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scan-A-Scam | Analysis Results</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    <title>Scan-A-Scam - Scan Results</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/results.css">
-    <link rel="stylesheet" href="../css/caregiver.css">
 </head>
 <body>
-
-    <header>
+    <header class="navbar">
+        <div class="logo">🛡️ Scan-A-Scam</div>
         <nav>
-            <div class="brand-logo" onclick="window.location.href='index.html'">
-                <i class="fa-solid fa-shield-cat"></i>
-                <h2>Scan-A-Scam</h2>
-            </div>
-            <div class="nav-links">
-                <a href="index.html" class="nav-btn"><i class="fa-solid fa-house"></i> Home</a>
-                <a href="upload.html" class="nav-btn"><i class="fa-solid fa-magnifying-glass"></i> Scanner</a>
-                <a href="community.html" class="nav-btn"><i class="fa-solid fa-bullhorn"></i> Fishers Alerts <span class="badge" id="badge-count">5</span></a>
-                <a href="caregiver.html" class="nav-btn"><i class="fa-solid fa-gear"></i> Caregiver Settings</a>
-            </div>
+            <a href="index.html">Home</a>
+            <a href="upload.html">Scan Another</a>
+            <a href="community.html">Community</a>
+            <a href="caregiver.html">Caregivers</a>
         </nav>
     </header>
 
-    <main class="page-container">
-        <h2 class="page-title">Analysis Results</h2>
-        <p class="page-subtitle">Here is the threat assessment breakdown for your message.</p>
+    <main class="results-container">
+        <h1>Analysis Results</h1>
+        
+        <div id="result-card" class="result-card">
+            <div id="risk-badge" class="risk-badge">
+                <span id="risk-icon">⏳</span>
+                <span id="risk-title">Loading Assessment...</span>
+            </div>
 
-        <!-- Risk Gauge Header -->
-        <div id="risk-banner" class="risk-gauge high">
-            <div class="score-display" id="res-score-display">85%</div>
-            <div class="score-title" id="res-title-display">Likely Scam Detected</div>
-        </div>
-
-        <!-- Caregiver Emergency Alert Trigger Box (Score >= 80%) -->
-        <div id="caregiver-alert-card" class="caregiver-emergency-card" style="display: none;">
-            <div class="caregiver-card-header">
-                <div>
-                    <h3 class="caregiver-alert-heading"><i class="fa-solid fa-triangle-exclamation"></i> High Risk Detected — Alert Your Caregiver</h3>
-                    <p class="caregiver-sub-text" id="caregiver-contact-display">Trusted Contact: Sarah (Daughter) • (317) 555-0182</p>
+            <div class="score-section">
+                <h3>Threat Score: <span id="threat-score">--</span>/100</h3>
+                <div class="progress-bar-container">
+                    <div id="progress-fill" class="progress-fill"></div>
                 </div>
-                <a href="caregiver.html" class="btn btn-outline" style="background: white;"><i class="fa-solid fa-gear"></i> Edit Contact</a>
             </div>
 
-            <div class="share-preview-box">
-                <strong>Pre-Formatted Safety Net Alert:</strong>
-                "<span id="caregiver-msg-preview">Hi Sarah, Scan-A-Scam flagged a 85% high-risk scam message asking for immediate money. Can you check this before I respond?</span>"
+            <div class="section-block">
+                <h3>Summary</h3>
+                <p id="result-summary">Retrieving evaluation from AI security engine...</p>
             </div>
 
-            <div class="button-group">
-                <button class="btn btn-danger" onclick="sendCaregiverSMS()"><i class="fa-solid fa-comment-sms"></i> Send SMS Alert to Caregiver</button>
-                <button class="btn btn-outline" style="background: white;" onclick="sendCaregiverEmail()"><i class="fa-solid fa-envelope"></i> Send Email Alert</button>
+            <div class="section-block" id="red-flags-container">
+                <h3>Detected Red Flags</h3>
+                <ul id="red-flags-list">
+                    <li>Analyzing indicators...</li>
+                </ul>
             </div>
-            <p id="caregiver-sent-status" class="status-msg-green" style="display: none;"></p>
-        </div>
 
-        <!-- Suspicious Reasons -->
-        <div class="card result-card-spacing">
-            <h3><i class="fa-solid fa-circle-exclamation text-amber"></i> Why does this look suspicious?</h3>
-            <ul class="bullet-list" id="res-flags-container"></ul>
-        </div>
-
-        <!-- Actionable Steps -->
-        <div class="card result-card-spacing">
-            <h3><i class="fa-solid fa-shield-check text-green"></i> Recommended Next Steps</h3>
-            <ul class="bullet-list" id="res-steps-container"></ul>
-        </div>
-
-        <!-- Share with Fishers -->
-        <div class="card community-share-box">
-            <div class="share-box-content">
-                <div>
-                    <h3 class="text-primary"><i class="fa-solid fa-bullhorn"></i> Share with Fishers Community</h3>
-                    <p class="share-box-sub">Help protect fellow residents in Fishers by posting an anonymous alert to the local board.</p>
-                </div>
-                <!-- UPDATED: Opens modal window for location & details entry -->
-                <button class="btn btn-primary" onclick="openCustomPostModal()"><i class="fa-solid fa-share-nodes"></i> Post Anonymous Alert</button>
+            <div class="section-block">
+                <h3>Recommended Actions</h3>
+                <ul id="recommendations-list">
+                    <li>Please wait...</li>
+                </ul>
             </div>
-            <p id="post-status-msg" class="status-msg-blue" style="display: none;"></p>
-        </div>
 
-        <div style="margin-top: 1.5rem; text-align: center;">
-            <a href="upload.html" class="btn btn-outline"><i class="fa-solid fa-arrow-left"></i> Check Another Message</a>
+            <div class="action-buttons">
+                <a href="upload.html" class="btn-secondary">Scan Another Item</a>
+                <a href="caregiver.html" class="btn-primary" id="notify-caregiver-btn">Alert Caregiver / Community</a>
+            </div>
         </div>
     </main>
 
-    <footer>
-        <p>Scan-A-Scam • Fishers, Indiana Community Protection • NexTech CS for Good</p>
-    </footer>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const storedData = sessionStorage.getItem('scanResult');
+            const resultCard = document.getElementById('result-card');
+            const riskBadge = document.getElementById('risk-badge');
+            const riskIcon = document.getElementById('risk-icon');
+            const riskTitle = document.getElementById('risk-title');
+            const threatScore = document.getElementById('threat-score');
+            const progressFill = document.getElementById('progress-fill');
+            const resultSummary = document.getElementById('result-summary');
+            const redFlagsList = document.getElementById('red-flags-list');
+            const recommendationsList = document.getElementById('recommendations-list');
 
-    <script src="../js/app.js"></script>
+            if (!storedData) {
+                resultSummary.textContent = "No scan data found. Please submit a message or image to scan.";
+                return;
+            }
+
+            const data = JSON.parse(storedData);
+            const level = data.riskLevel ? data.riskLevel.toLowerCase() : 'yellow';
+
+            // Apply styling classes based on risk level (green, yellow, red)
+            resultCard.classList.remove('risk-green', 'risk-yellow', 'risk-red');
+            resultCard.classList.add(`risk-${level}`);
+
+            if (level === 'green') {
+                riskIcon.textContent = '✅';
+                riskTitle.textContent = 'Low Risk / Appears Safe';
+            } else if (level === 'yellow') {
+                riskIcon.textContent = '⚠️';
+                riskTitle.textContent = 'Suspicious / Exercise Caution';
+            } else {
+                riskIcon.textContent = '🚨';
+                riskTitle.textContent = 'High Risk Scam Detected!';
+            }
+
+            threatScore.textContent = data.score || 0;
+            progressFill.style.width = `${data.score || 0}%`;
+            resultSummary.textContent = data.summary || "No summary provided.";
+
+            // Populate Red Flags
+            redFlagsList.innerHTML = '';
+            if (data.redFlags && data.redFlags.length > 0) {
+                data.redFlags.forEach(flag => {
+                    const li = document.createElement('li');
+                    li.textContent = flag;
+                    redFlagsList.appendChild(li);
+                });
+            } else {
+                const li = document.createElement('li');
+                li.textContent = 'No major red flags identified.';
+                redFlagsList.appendChild(li);
+            }
+
+            // Populate Recommendations
+            recommendationsList.innerHTML = '';
+            if (data.recommendations && data.recommendations.length > 0) {
+                data.recommendations.forEach(rec => {
+                    const li = document.createElement('li');
+                    li.textContent = rec;
+                    recommendationsList.appendChild(li);
+                });
+            } else {
+                const li = document.createElement('li');
+                li.textContent = 'Stay vigilant and verify through official channels.';
+                recommendationsList.appendChild(li);
+            }
+        });
+    </script>
 </body>
 </html>
