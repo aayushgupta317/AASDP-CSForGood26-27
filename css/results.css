@@ -1,91 +1,22 @@
-/* ==========================================================================
-   Scan-A-Scam Results Page Styling
-   ========================================================================== */
-
-.risk-gauge {
-    border-radius: var(--radius-lg);
-    padding: 2rem;
-    text-align: center;
-    margin-bottom: 2rem;
-}
-
-.risk-gauge.high {
-    background: var(--danger-bg);
-    border: 1.5.px solid var(--danger-border);
-    color: var(--danger-text);
-}
-
-.risk-gauge.medium {
-    background: var(--warning-bg);
-    border: 1.5px solid var(--warning-border);
-    color: var(--warning-text);
-}
-
-.risk-gauge.low {
-    background: var(--success-bg);
-    border: 1.5px solid var(--success-border);
-    color: var(--success-text);
-}
-
-.score-display {
-    font-size: 3.5rem;
-    font-weight: 800;
-    line-height: 1;
-    margin-bottom: 0.5rem;
-}
-
-.score-title {
-    font-size: 1.35rem;
-    font-weight: 700;
-}
-
-.bullet-list {
-    padding-left: 1.25rem;
-    margin-top: 0.75rem;
-}
-
-.bullet-list li {
-    margin-bottom: 0.5rem;
-    color: var(--text-main);
-}
-
-.result-card-spacing {
-    margin-bottom: 1.5rem;
-}
-
-.text-amber { color: #f59e0b; }
-.text-green { color: #059669; }
-.text-primary { color: var(--primary); }
-
-.community-share-box {
-    background: var(--accent-bg);
-    border-color: #bfdbfe;
-}
-
-.share-box-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-}
-
-.share-box-sub {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    margin-top: 0.25rem;
-}
-
-.status-msg-blue {
-    margin-top: 0.75rem;
-    font-size: 0.875rem;
-    font-weight: 700;
-    color: var(--primary);
-}
-
-.status-msg-green {
-    margin-top: 0.75rem;
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: #15803d;
-}
+/* Results page */
+.risk-gauge { border-radius: var(--radius-lg); padding: 2rem; margin-bottom: 1.5rem; border: 2px solid; }
+.risk-gauge.high   { background: var(--danger-bg);  border-color: var(--danger-border);  color: var(--danger-text); }
+.risk-gauge.medium { background: var(--warning-bg); border-color: var(--warning-border); color: var(--warning-text); }
+.risk-gauge.low    { background: var(--success-bg); border-color: var(--success-border); color: var(--success-text); }
+.score-title { font-size: 2.2rem; font-weight: 700; line-height: 1.15; }
+.score-title i { margin-right: .5rem; }
+.score-category { margin: .35rem 0 1.25rem; font-weight: 700; }
+.meter { height: 14px; background: rgba(255,255,255,.75); border-radius: 7px; overflow: hidden; border: 1px solid currentColor; }
+.meter-fill { height: 100%; width: 0; background: currentColor; transition: width .6s ease; }
+.score-display { margin-top: .5rem; font-weight: 700; }
+.result-card-spacing { margin-bottom: 1.5rem; }
+.bullet-list { padding-left: 1.4rem; margin: .5rem 0 0; }
+.bullet-list li { margin-bottom: .6rem; }
+.caregiver-emergency-card { background: var(--danger-bg); border: 2px solid var(--danger-border); }
+.share-preview-box { background: #fff; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1rem; margin: 1rem 0; font-style: italic; }
+.button-group, .action-buttons { display: flex; flex-wrap: wrap; gap: .75rem; }
+.share-box-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+.share-box-sub { color: var(--text-muted); font-size: .95rem; margin: .25rem 0 0; }
+.status-msg-blue, .status-msg-green { margin-top: .75rem; font-weight: 700; }
+.status-msg-blue { color: var(--primary); }
+.status-msg-green { color: #15803D; }
