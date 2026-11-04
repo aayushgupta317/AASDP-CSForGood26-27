@@ -3,72 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scan-A-Scam - Upload & Analyze</title>
+    <title>Scan-A-Scam | Scanner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/upload.css">
 </head>
 <body>
-    <header class="navbar">
-        <div class="logo">🛡️ Scan-A-Scam</div>
+    <header>
         <nav>
-            <a href="index.html">Home</a>
-            <a href="upload.html" class="active">Scan</a>
-            <a href="community.html">Community</a>
-            <a href="caregiver.html">Caregivers</a>
+            <div class="brand-logo" onclick="window.location.href='index.html'">
+                <i class="fa-solid fa-shield-cat"></i>
+                <h2>Scan-A-Scam</h2>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-btn"><i class="fa-solid fa-house"></i> Home</a>
+                <a href="upload.html" class="nav-btn active"><i class="fa-solid fa-magnifying-glass"></i> Scanner</a>
+                <a href="community.html" class="nav-btn"><i class="fa-solid fa-bullhorn"></i> Fishers Alerts <span class="badge" id="badge-count">5</span></a>
+                <a href="caregiver.html" class="nav-btn"><i class="fa-solid fa-gear"></i> Caregiver Settings</a>
+            </div>
         </nav>
     </header>
 
-    <main class="upload-container">
-        <h1>Scan a Message or Screenshot</h1>
-        <p>Paste suspicious text messages, emails, or upload a screenshot below to check for fraud patterns.</p>
+    <main class="page-container">
+        <h1 class="page-title">Check a message or screenshot</h1>
+        <p class="page-subtitle">Paste the message you received, or add a screenshot of it. We will tell you how likely it is to be a scam and what to do next.</p>
 
         <div class="upload-card">
-            <form id="scan-form">
-                <div class="form-group">
-                    <label for="scam-text">Paste Suspicious Text or Link:</label>
-                    <textarea id="scam-text" rows="6" placeholder="e.g., URGENT: Your bank account has been locked. Click here to verify..."></textarea>
+            <div id="scan-error" class="error-box hidden" role="alert"></div>
+
+            <form id="scan-form" novalidate>
+                <div class="field">
+                    <label for="scam-text">Paste the message here</label>
+                    <p class="hint">A text, email, or link you are not sure about.</p>
+                    <textarea id="scam-text" rows="6" placeholder="Example: URGENT: Your bank account has been locked. Click here to verify..."></textarea>
                 </div>
 
-                <div class="form-group file-upload-box">
-                    <label for="scam-file">Or Upload Image / Screenshot:</label>
-                    <input type="file" id="scam-file" accept="image/*">
+                <div class="field">
+                    <label for="scam-file">Or add a screenshot</label>
+                    <p class="hint">PNG, JPG, or WEBP, up to 8 MB.</p>
+                    <div class="file-box">
+                        <input type="file" id="scam-file" accept="image/png,image/jpeg,image/webp">
+                        <div id="preview" class="preview hidden">
+                            <img id="preview-img" alt="Preview of the screenshot you chose">
+                            <button type="button" id="remove-image" class="btn btn-outline">Remove image</button>
+                        </div>
+                    </div>
                 </div>
 
-                <button type="submit" id="analyze-btn" class="btn-primary">Analyze with AI 🔍</button>
+                <button type="submit" id="analyze-btn" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i> Check for scams</button>
             </form>
 
-            <div id="loading-spinner" class="hidden" style="text-align: center; padding: 40px;">
+            <div id="loading-panel" class="loading-panel hidden" role="status" aria-live="polite">
                 <div class="spinner"></div>
-                <p style="margin-top: 15px; font-weight: 600; color: #334155;">Analyzing content with Gemini AI security engine...</p>
+                <p>Checking your message. This usually takes a few seconds.</p>
             </div>
         </div>
     </main>
 
+    <footer>
+        <p>Scan-A-Scam • Fishers, Indiana Community Protection • NexTech CS for Good</p>
+    </footer>
+
+    <script src="../js/config.js"></script>
+    <script src="../js/security.js"></script>
     <script src="../js/ai-integration.js"></script>
-    <script>
-        document.getElementById('scan-form').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const textInput = document.getElementById('scam-text').value.trim();
-            const fileInput = document.getElementById('scam-file').files[0];
-
-            if (!textInput && !fileInput) {
-                alert('Please enter text or upload an image to analyze.');
-                return;
-            }
-
-            document.getElementById('scan-form').style.display = 'none';
-            document.getElementById('loading-spinner').classList.remove('hidden');
-
-            let contentToAnalyze = textInput;
-            if (fileInput) {
-                contentToAnalyze += ` [User uploaded image file: ${fileInput.name}]`;
-            }
-
-            const analysisResult = await analyzeScamContent(contentToAnalyze);
-            sessionStorage.setItem('scanResult', JSON.stringify(analysisResult));
-            window.location.href = 'results.html';
-        });
-    </script>
+    <script src="../js/upload.js"></script>
 </body>
 </html>
