@@ -105,8 +105,8 @@
         if (!container) return;
 
         const posts = getCommunityPosts();
-        const filtered = activeFilterLoc === "All" 
-            ? posts 
+        const filtered = activeFilterLoc === "All"
+            ? posts
             : posts.filter(p => p.location === activeFilterLoc);
 
         if (filtered.length === 0) {
@@ -160,22 +160,68 @@
         }
     };
 
-    global.saveCaregiverSettings = function (e) {
+        global.saveCaregiverSettings = function (e) {
         e.preventDefault();
+
         const updated = {
             name: document.getElementById("cg-name").value,
             phone: document.getElementById("cg-phone").value,
             email: document.getElementById("cg-email").value,
             relationship: document.getElementById("cg-rel").value
         };
+
         saveCaregiver(updated);
 
         const status = document.getElementById("cg-save-status");
         if (status) {
             status.style.display = "inline";
-            setTimeout(() => status.style.display = "none", 3000);
+            status.innerText = "Sending email...";
         }
+
+        const accessKey = global.SCAN_CONFIG && global.SCAN_CONFIG.WEB3FORMS_ACCESS_KEY;
+        if (!accessKey) {
+            if (status) status.innerText = "Email service is not configured.";
+            return;
+        }
+
+        const emailPayload = {
+            access_key: accessKey,
+            subject: "Scan-A-Scam caregiver contact update",
+            from_name: "Scan-A-Scam",
+            replyto: updated.email,
+            message: [
+                "Caregiver Name: " + updated.name,
+                "Phone Number: " + updated.phone,
+                "Email Address: " + updated.email,
+                "Relationship: " + updated.relationship
+            ].join("\n")
+        };
+
+        fetch("https://api.web3forms.com/submit", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(emailPayload)
+        })
+        .then(async (response) => {
+            const result = await response.json().catch(() => ({}));
+            if (response.ok && result.success) {
+                if (status) {
+                    status.innerText = "Saved & Emailed!";
+                    setTimeout(() => status.style.display = "none", 3000);
+                }
+            } else {
+            if (status) status.innerText = result.message || "Error sending email.";
+            }
+        })
+        .catch(error => {
+            console.error("Web3Forms Error:", error);
+            if (status) status.innerText = "Network Error.";
+        });
     };
+
 
     // Interactive prompt window for location and details when sharing scan results
     global.openCustomPostModal = function () {

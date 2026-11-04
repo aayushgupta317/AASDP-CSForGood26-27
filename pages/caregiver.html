@@ -17,12 +17,12 @@
 
     <header>
         <nav>
-            <div class="brand-logo" onclick="window.location.href='index.html'">
+            <div class="brand-logo" onclick="window.location.href='../index.html'">
                 <i class="fa-solid fa-shield-cat"></i>
                 <h2>Scan-A-Scam</h2>
             </div>
             <div class="nav-links">
-                <a href="index.html" class="nav-btn"><i class="fa-solid fa-house"></i> Home</a>
+                <a href="../index.html" class="nav-btn"><i class="fa-solid fa-house"></i> Home</a>
                 <a href="upload.html" class="nav-btn"><i class="fa-solid fa-magnifying-glass"></i> Scanner</a>
                 <a href="community.html" class="nav-btn"><i class="fa-solid fa-bullhorn"></i> Fishers Alerts <span class="badge" id="badge-count">5</span></a>
                 <a href="caregiver.html" class="nav-btn active"><i class="fa-solid fa-gear"></i> Caregiver Settings</a>
@@ -36,24 +36,25 @@
 
         <div class="card caregiver-card-max">
             <form onsubmit="saveCaregiverSettings(event)">
+
                 <div class="form-group">
                     <label for="cg-name" class="form-label-bold">Caregiver Name:</label>
-                    <input type="text" id="cg-name" value="Sarah" required placeholder="e.g., Sarah (Daughter)">
+                    <input type="text" id="cg-name" name="Caregiver Name" value="Sarah" required placeholder="e.g., Sarah (Daughter)">
                 </div>
 
                 <div class="form-group">
                     <label for="cg-phone" class="form-label-bold">Phone Number (for SMS Alerts):</label>
-                    <input type="tel" id="cg-phone" value="(317) 555-0182" required placeholder="(317) 555-XXXX">
+                    <input type="tel" id="cg-phone" name="Phone Number" value="(317) 555-0182" required placeholder="(317) 555-XXXX">
                 </div>
 
                 <div class="form-group">
                     <label for="cg-email" class="form-label-bold">Email Address:</label>
-                    <input type="email" id="cg-email" value="sarah.caregiver@example.com" required placeholder="name@example.com">
+                    <input type="email" id="cg-email" name="Email Address" value="sarah.caregiver@example.com" required placeholder="name@example.com">
                 </div>
 
                 <div class="form-group-last">
                     <label for="cg-rel" class="form-label-bold">Relationship:</label>
-                    <input type="text" id="cg-rel" value="Daughter" placeholder="e.g., Son, Daughter, Caregiver">
+                    <input type="text" id="cg-rel" name="Relationship" value="Daughter" placeholder="e.g., Son, Daughter, Caregiver">
                 </div>
 
                 <button type="submit" class="btn btn-success"><i class="fa-solid fa-floppy-disk"></i> Save Contact Settings</button>
@@ -66,6 +67,7 @@
         <p>Scan-A-Scam • Fishers, Indiana Community Protection • NexTech CS for Good</p>
     </footer>
 
+    <script src="../js/config.js"></script>
     <script src="../js/app.js"></script>
 </body>
 </html>
