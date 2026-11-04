@@ -1,85 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Scan-A-Scam | Protect Your Loved Ones</title>
-  <link rel="stylesheet" href="../css/style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scan-A-Scam | Results</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/results.css">
 </head>
 <body>
+    <header>
+        <nav>
+            <div class="brand-logo" onclick="window.location.href='index.html'">
+                <i class="fa-solid fa-shield-cat"></i>
+                <h2>Scan-A-Scam</h2>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-btn"><i class="fa-solid fa-house"></i> Home</a>
+                <a href="upload.html" class="nav-btn"><i class="fa-solid fa-magnifying-glass"></i> Scanner</a>
+                <a href="community.html" class="nav-btn"><i class="fa-solid fa-bullhorn"></i> Fishers Alerts <span class="badge" id="badge-count">5</span></a>
+                <a href="caregiver.html" class="nav-btn"><i class="fa-solid fa-gear"></i> Caregiver Settings</a>
+            </div>
+        </nav>
+    </header>
 
-  <!-- Navigation Bar -->
-  <header class="navbar">
-    <div class="nav-container">
-      <a href="index.html" class="logo">
-        <span class="logo-shield">🛡️</span> Scan-A-Scam
-      </a>
-      <nav class="nav-links">
-        <a href="index.html" class="active">Home</a>
-        <a href="upload.html">Scan Message</a>
-        <a href="community.html">Community Alerts</a>
-        <a href="caregiver.html">Caregiver Dashboard</a>
-      </nav>
-    </div>
-  </header>
+    <main class="page-container">
+        <h1 class="page-title">Your scan results</h1>
 
-  <!-- Hero Section -->
-  <main>
-    <section class="hero-section">
-      <div class="hero-content">
-        <span class="badge">AI-Powered Scam Protection</span>
-        <h1 class="hero-title">Protecting Seniors & Families from Digital Fraud</h1>
-        <p class="hero-subtitle">
-          Instantly analyze suspicious text messages, emails, and screenshots using advanced AI detection. Keep your community safe and caregivers notified in real time.
-        </p>
-        
-        <!-- Action Buttons -->
-        <div class="hero-cta">
-          <a href="upload.html" class="btn btn-primary">
-            🔍 Scan a Suspicious Message
-          </a>
-          <a href="caregiver.html" class="btn btn-secondary">
-            👥 Caregiver Portal
-          </a>
+        <section id="empty-state" class="card hidden">
+            <h3>No scan to show yet</h3>
+            <p>Check a message first and the results will appear here.</p>
+            <p style="margin-top: 1rem;"><a href="upload.html" class="btn btn-primary">Check a message</a></p>
+        </section>
+
+        <div id="results" class="hidden">
+            <div id="risk-banner" class="risk-gauge" role="status">
+                <div id="res-title-display" class="score-title"><i id="res-icon" aria-hidden="true"></i><span></span></div>
+                <p id="res-category" class="score-category"></p>
+                <div id="meter" class="meter" role="meter" aria-label="Risk score" aria-valuemin="0" aria-valuemax="100"><div id="meter-fill" class="meter-fill"></div></div>
+                <div id="res-score-display" class="score-display"></div>
+            </div>
+
+            <div class="card result-card-spacing">
+                <h3>What we found</h3>
+                <p id="res-summary" style="color: var(--text-main);"></p>
+            </div>
+
+            <div class="card result-card-spacing">
+                <h3>Warning signs</h3>
+                <ul id="res-flags-container" class="bullet-list"></ul>
+            </div>
+
+            <div class="card result-card-spacing">
+                <h3>What you should do</h3>
+                <ul id="res-steps-container" class="bullet-list"></ul>
+            </div>
+
+            <div id="caregiver-alert-card" class="card caregiver-emergency-card result-card-spacing hidden">
+                <h3>Ask someone you trust</h3>
+                <p id="caregiver-contact-display"></p>
+                <div id="caregiver-msg-preview" class="share-preview-box"></div>
+                <div class="button-group">
+                    <button class="btn btn-primary" onclick="sendCaregiverSMS()"><i class="fa-solid fa-comment-sms"></i> Text them</button>
+                    <button class="btn btn-outline" onclick="sendCaregiverEmail()"><i class="fa-solid fa-envelope"></i> Email them</button>
+                </div>
+                <div id="caregiver-sent-status" class="status-msg-green" style="display: none;"></div>
+            </div>
+
+            <div class="card result-card-spacing">
+                <div class="share-box-content">
+                    <div>
+                        <h3>Warn your neighbors</h3>
+                        <p class="share-box-sub">Share this scam anonymously on the Fishers alert board.</p>
+                    </div>
+                    <button class="btn btn-outline" onclick="openCustomPostModal()"><i class="fa-solid fa-bullhorn"></i> Share alert</button>
+                </div>
+                <div id="post-status-msg" class="status-msg-blue" style="display: none;"></div>
+            </div>
+
+            <div class="action-buttons">
+                <a href="upload.html" class="btn btn-primary"><i class="fa-solid fa-rotate-right"></i> Check another message</a>
+            </div>
         </div>
-      </div>
-    </section>
+    </main>
 
-    <!-- Features Overview -->
-    <section class="features-section">
-      <div class="section-header">
-        <h2>How Scan-A-Scam Protects You</h2>
-        <p>Simple tools designed for clarity, ease of use, and peace of mind.</p>
-      </div>
+    <footer>
+        <p>Scan-A-Scam • Fishers, Indiana Community Protection • NexTech CS for Good</p>
+    </footer>
 
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">🤖</div>
-          <h3>AI Threat Detection</h3>
-          <p>Instantly evaluate screenshots and text messages to calculate risk levels and highlight fraud tactics.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">📢</div>
-          <h3>Community Feed</h3>
-          <p>Stay informed about emerging local scams reported by residents across your town and neighborhood.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">📱</div>
-          <h3>Caregiver Alerts</h3>
-          <p>Connect trusted family members or caregivers to receive instant notifications if high-risk scams are detected.</p>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-container">
-      <p>&copy; 2026-2027 Scan-A-Scam Project — CSforGood Entry</p>
-    </div>
-  </footer>
-
+    <script src="../js/app.js"></script>
+    <script src="../js/results.js"></script>
 </body>
 </html>
