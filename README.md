@@ -110,6 +110,13 @@ These are the most important lessons from the initial setup process. Please do n
 - Do not leave the repo in an unorganized state
 - Do not commit `.DS_Store` or ZIP files
 
+### Gemini scanner setup
+
+The scanner uses Gemini through the browser. Copy `js/config.example.js` to
+`js/config.js` and set `GEMINI_API_KEY` to a key from Google AI Studio. Keep
+`js/config.js` private; it is ignored by Git. The results page shows Gemini's
+risk score, explanation, color-coded risk level, and quick-takeaway bullets.
+
 Before starting work, always confirm that the repository is the correct one:
 
 ```bash

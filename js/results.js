@@ -41,6 +41,10 @@
         $("meter").setAttribute("aria-valuenow", String(data.score));
 
         $("res-summary").textContent = data.summary || "";
+        const insight = $("ai-insight-card");
+        insight.classList.add(tier.cls);
+        $("ai-insight-heading").textContent = data.insightHeadline || "Pause and check before you respond.";
+        fillList("ai-insight-points", data.insightPoints, "Take your time and verify the request using contact details you already trust.");
         fillList("res-flags-container", data.redFlags, "No major warning signs found.");
         fillList("res-steps-container", data.recommendations, "If you are unsure, check with the company using a phone number you already trust.");
 
