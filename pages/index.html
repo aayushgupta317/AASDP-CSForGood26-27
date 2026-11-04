@@ -1,78 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scan-A-Scam | Home</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <link rel="stylesheet" href="../css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scan-A-Scam | Fishers, Indiana Community Protection</title>
+  <link rel="stylesheet" href="../css/style.css" />
 </head>
 <body>
 
-    <!-- Header Navbar -->
-    <header>
-        <nav>
-            <div class="brand-logo" onclick="window.location.href='index.html'">
-                <i class="fa-solid fa-shield-cat"></i>
-                <h2>Scan-A-Scam</h2>
-            </div>
-            <div class="nav-links">
-                <a href="index.html" class="nav-btn active"><i class="fa-solid fa-house"></i> Home</a>
-                <a href="upload.html" class="nav-btn"><i class="fa-solid fa-magnifying-glass"></i> Scanner</a>
-                <a href="community.html" class="nav-btn"><i class="fa-solid fa-bullhorn"></i> Fishers Alerts <span class="badge" id="badge-count">5</span></a>
-                <a href="caregiver.html" class="nav-btn"><i class="fa-solid fa-gear"></i> Caregiver Settings</a>
-            </div>
-        </nav>
-    </header>
+  <!-- Top Navigation Bar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <span class="logo-shield">🛡️</span> Scan-A-Scam
+      </a>
+      <nav class="nav-links">
+        <a href="index.html" class="active">🏠 Home</a>
+        <a href="upload.html">🔍 Scanner</a>
+        <a href="community.html">📢 Fishers Alerts <span class="badge-count">5</span></a>
+        <a href="caregiver.html">⚙️ Caregiver Settings</a>
+      </nav>
+    </div>
+  </header>
 
-    <main>
-        <!-- Hero Section -->
-        <section class="hero">
-            <h1>Protecting Fishers Against Digital Scams</h1>
-            <p>Double-check suspicious text messages, emails, and screenshots before clicking links or sharing personal info.</p>
-            <div class="hero-buttons">
-                <a href="upload.html" class="btn btn-white"><i class="fa-solid fa-shield-halved"></i> Start Free Scam Scan</a>
-                <a href="community.html" class="btn btn-outline-hero"><i class="fa-solid fa-bullhorn"></i> View Fishers Feed</a>
-            </div>
-        </section>
+  <!-- Hero Banner -->
+  <main>
+    <section class="hero-section">
+      <div class="hero-content">
+        <h1 class="hero-title">Protecting Fishers Against Digital Scams</h1>
+        <p class="hero-subtitle">
+          Double-check suspicious text messages, emails, and screenshots before clicking links or sharing personal info.
+        </p>
 
-        <!-- Feature Grid Cards -->
-        <div class="card-grid">
-            <div class="card">
-                <div class="card-icon"><i class="fa-solid fa-file-contract"></i></div>
-                <h3>Text &amp; Email Analysis</h3>
-                <p>Paste suspicious text or upload screenshots to check for common fraud indicators.</p>
-            </div>
-
-            <div class="card">
-                <div class="card-icon"><i class="fa-solid fa-list-check"></i></div>
-                <h3>Clear Explanations</h3>
-                <p>Get straightforward breakdowns explaining why a message looks suspicious without tech jargon.</p>
-            </div>
-
-            <div class="card">
-                <div class="card-icon"><i class="fa-solid fa-user-shield"></i></div>
-                <h3>Caregiver Safety Net</h3>
-                <p>Automatically generate an instant shareable second-opinion alert to a family member when high risk is detected.</p>
-            </div>
-
-            <div class="card">
-                <div class="card-icon"><i class="fa-solid fa-users"></i></div>
-                <h3>Fishers Community Watch</h3>
-                <p>Help keep local neighbors informed by anonymously sharing verified scam alerts in Hamilton County.</p>
-            </div>
+        <!-- Centered Action Buttons -->
+        <div class="hero-cta">
+          <a href="upload.html" class="btn btn-primary">
+            🛡️ Start Free Scam Scan
+          </a>
+          <a href="community.html" class="btn btn-secondary">
+            📢 View Fishers Feed
+          </a>
         </div>
-    </main>
+      </div>
+    </section>
 
-    <footer>
-        <p>Scan-A-Scam • Fishers, Indiana Community Protection • NexTech CS for Good</p>
-    </footer>
+    <!-- Feature Cards Section -->
+    <section class="features-section">
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">📄</div>
+          <h3>Text &amp; Email Analysis</h3>
+          <p>Paste suspicious text or upload screenshots to check for common fraud indicators.</p>
+        </div>
 
-    <script src="../js/app.js"></script>
+        <div class="feature-card">
+          <div class="feature-icon">📋</div>
+          <h3>Clear Explanations</h3>
+          <p>Get straightforward breakdowns explaining why a message looks suspicious without tech jargon.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🛡️</div>
+          <h3>Caregiver Safety Net</h3>
+          <p>Automatically generate an instant shareable second-opinion alert to a family member when high risk is detected.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">👥</div>
+          <h3>Fishers Community Watch</h3>
+          <p>Help keep local neighbors informed by anonymously sharing verified scam alerts in Hamilton County.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <p>Scan-A-Scam • Fishers, Indiana Community Protection • NexTech CS for Good</p>
+    </div>
+  </footer>
+
 </body>
 </html>
