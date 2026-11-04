@@ -37,14 +37,13 @@
                 <button type="submit" id="analyze-btn" class="btn-primary">Analyze with AI 🔍</button>
             </form>
 
-            <div id="loading-spinner" class="hidden">
+            <div id="loading-spinner" class="hidden" style="text-align: center; padding: 40px;">
                 <div class="spinner"></div>
-                <p>Analyzing content with Gemini AI security engine...</p>
+                <p style="margin-top: 15px; font-weight: 600; color: #334155;">Analyzing content with Gemini AI security engine...</p>
             </div>
         </div>
     </main>
 
-    <!-- Include AI integration and app logic -->
     <script src="../js/ai-integration.js"></script>
     <script>
         document.getElementById('scan-form').addEventListener('submit', async function(e) {
@@ -58,24 +57,16 @@
                 return;
             }
 
-            // Show loading state
             document.getElementById('scan-form').style.display = 'none';
             document.getElementById('loading-spinner').classList.remove('hidden');
 
             let contentToAnalyze = textInput;
-
-            // If an image file is uploaded, convert it or read text (simplified reader fallback)
             if (fileInput) {
-                contentToAnalyze += ` [User uploaded image file: ${fileInput.name}. Please evaluate based on common visual scam indicators if text is absent.]`;
+                contentToAnalyze += ` [User uploaded image file: ${fileInput.name}]`;
             }
 
-            // Call Gemini AI
             const analysisResult = await analyzeScamContent(contentToAnalyze);
-
-            // Store result in sessionStorage so results.html can read it
             sessionStorage.setItem('scanResult', JSON.stringify(analysisResult));
-
-            // Redirect to results page
             window.location.href = 'results.html';
         });
     </script>
