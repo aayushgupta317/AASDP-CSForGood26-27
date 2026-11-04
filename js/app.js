@@ -17,6 +17,8 @@
         };
     };
 
+    global.getCaregiver = getCaregiver;
+
     const saveCaregiver = function (data) {
         localStorage.setItem("scanAScam:caregiver", JSON.stringify(data));
     };
@@ -82,137 +84,7 @@
         return defaultPosts;
     };
 
-    global.applySample = function (type) {
-        const input = document.getElementById("scanner-input");
-        if (!input) return;
-
-        if (type === "duke") {
-            input.value = "DUKE ENERGY URGENT NOTICE: Power disconnect scheduled in 2 hours for unpaid balance of $345.00. Call 1-800-555-0199 now and pay via Zelle to avoid shutoff.";
-        } else if (type === "irs") {
-            input.value = "INTERNAL REVENUE SERVICE: Federal arrest warrant issued in Hamilton County for tax fraud. Call officer immediately to settle back taxes.";
-        } else if (type === "giftcard") {
-            input.value = "Target Promotions: You won a $500 gift card! Click http://target-reward-claim.xyz to verify your identity and credit card now.";
-        } else if (type === "grandparent") {
-            input.value = "Grandma please help, I got arrested after a crash near Indianapolis. I need $2,000 for bail right now. Don't call mom or dad, send it via wire transfer!";
-        }
-    };
-
-    global.handleImageFile = function (event) {
-        const file = event.target.files[0];
-        const label = document.getElementById("upload-label");
-        const input = document.getElementById("scanner-input");
-
-        if (file) {
-            if (label) label.innerText = `Selected: ${file.name}`;
-            if (input && !input.value) {
-                input.value = `[Extracted Text from ${file.name}]: URGENT ALERT - Security compromised. Call support at 1-800-555-9011 to prevent account lock.`;
-            }
-        }
-    };
-
-    global.clearScannerForm = function () {
-        const input = document.getElementById("scanner-input");
-        const picker = document.getElementById("file-picker");
-        const label = document.getElementById("upload-label");
-
-        if (input) input.value = "";
-        if (picker) picker.value = "";
-        if (label) label.innerText = "Click to select a screenshot image";
-    };
-
-    global.executeScan = function () {
-        const textInput = document.getElementById("scanner-input");
-        const text = textInput ? textInput.value.trim() : "";
-
-        if (!text) {
-            alert("Please enter or paste message content first.");
-            return;
-        }
-
-        let score = 25;
-        let flags = [];
-        let category = "Suspicious Message";
-        const lower = text.toLowerCase();
-
-        if (lower.includes("urgent") || lower.includes("immediately") || lower.includes("2 hours") || lower.includes("disconnect")) {
-            score += 25;
-            flags.push("Creates artificial time pressure to panic you into acting without checking.");
-        }
-        if (lower.includes("zelle") || lower.includes("gift card") || lower.includes("wire") || lower.includes("pay")) {
-            score += 30;
-            flags.push("Demands non-standard or untraceable payment methods (Zelle, gift cards, wire transfer).");
-        }
-        if (lower.includes("arrest") || lower.includes("warrant") || lower.includes("irs") || lower.includes("jail")) {
-            score += 25;
-            flags.push("Uses legal intimidation or legal threats to coerce money.");
-            category = "Government Fraud";
-        }
-        if (lower.includes("http") || lower.includes(".xyz") || lower.includes("click")) {
-            score += 15;
-            flags.push("Includes unverified third-party links designed to capture login information.");
-        }
-
-        if (lower.includes("grandma") || lower.includes("bail")) category = "Family Emergency Scam";
-        if (lower.includes("duke energy")) category = "Utility Disconnect Scam";
-
-        score = Math.min(96, score);
-        if (flags.length === 0) {
-            flags.push("No obvious automated keywords found, but always verify unfamiliar senders.");
-        }
-
-        const steps = [
-            "Do not click any links or reply directly to the sender.",
-            "Never wire money, purchase gift cards, or send Zelle payments under pressure.",
-            "Contact the official organization directly using a number from a bill or statement."
-        ];
-
-        const lastAnalysisResult = {
-            score: score,
-            flags: flags,
-            steps: steps,
-            rawText: text,
-            category: category
-        };
-
-        sessionStorage.setItem("scanAScam:lastResult", JSON.stringify(lastAnalysisResult));
-        window.location.href = "results.html";
-    };
-
     window.addEventListener("DOMContentLoaded", function () {
-        const scoreDisplay = document.getElementById("res-score-display");
-        if (scoreDisplay) {
-            const stored = sessionStorage.getItem("scanAScam:lastResult");
-            if (stored) {
-                const res = JSON.parse(stored);
-                scoreDisplay.innerText = res.score + "%";
-
-                const titleDisplay = document.getElementById("res-title-display");
-                const banner = document.getElementById("risk-banner");
-                const cgCard = document.getElementById("caregiver-alert-card");
-                const cgContact = getCaregiver();
-
-                if (res.score >= 75) {
-                    banner.className = "risk-gauge high";
-                    if (titleDisplay) titleDisplay.innerText = "High Risk Scam Detected";
-                } else if (res.score >= 45) {
-                    banner.className = "risk-gauge medium";
-                    if (titleDisplay) titleDisplay.innerText = "Moderate Risk Flagged";
-                } else {
-                    banner.className = "risk-gauge low";
-                    if (titleDisplay) titleDisplay.innerText = "Low Risk Found";
-                }
-
-                document.getElementById("res-flags-container").innerHTML = res.flags.map(f => `<li>${f}</li>`).join("");
-                document.getElementById("res-steps-container").innerHTML = res.steps.map(s => `<li>${s}</li>`).join("");
-
-                if (res.score >= 80 && cgCard) {
-                    cgCard.style.display = "block";
-                    document.getElementById("caregiver-contact-display").innerText = `Trusted Contact: ${cgContact.name} (${cgContact.relationship}) • ${cgContact.phone}`;
-                    document.getElementById("caregiver-msg-preview").innerText = `Hi ${cgContact.name}, Scan-A-Scam flagged a ${res.score}% high-risk scam message asking for money. Can you check this before I respond?`;
-                }
-            }
-        }
-
         const feedContainer = document.getElementById("alerts-feed-container");
         if (feedContainer) {
             renderCommunityFeed();
