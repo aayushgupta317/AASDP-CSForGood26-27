@@ -188,6 +188,7 @@
             access_key: accessKey,
             subject: "Scan-A-Scam caregiver contact update",
             from_name: "Scan-A-Scam",
+            email: updated.email,
             replyto: updated.email,
             message: [
                 "Caregiver Name: " + updated.name,
