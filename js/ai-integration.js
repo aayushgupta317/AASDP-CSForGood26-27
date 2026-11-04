@@ -108,7 +108,7 @@
                 body: JSON.stringify({
                     systemInstruction: { parts: [{ text: INSTRUCTIONS }] },
                     contents: [{ role: "user", parts: parts }],
-                    generationConfig: { temperature: 0.2, responseMimeType: "application/json", responseSchema: SCHEMA }
+                    generationConfig: { responseMimeType: "application/json", responseSchema: SCHEMA }
                 })
             });
         } catch (error) {
