@@ -3,7 +3,7 @@
 (function (global) {
     "use strict";
 
-    const MODEL = "gemini-3.5-flash-lite";
+    const MODEL = "gemini-3.6-flash";
     const ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models/" + MODEL + ":generateContent";
     const PLACEHOLDER = "PASTE_YOUR_GEMINI_API_KEY_HERE";
     const TIMEOUT_MS = 45000;
