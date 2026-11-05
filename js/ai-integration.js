@@ -1,5 +1,4 @@
-// js/ai-integration.js - sends pasted text and/or a screenshot to Gemini and returns a normalized result.
-// The API key comes from js/config.js (gitignored). Change MODEL here if Google retires it.
+
 (function (global) {
     "use strict";
 
@@ -85,7 +84,7 @@
         };
     }
 
-    // input: { text: string, file: File | null }. Throws an Error with a user-friendly message on failure.
+
     async function analyzeScamContent(input) {
         const key = getKey();
         const text = (input && input.text) || "";
